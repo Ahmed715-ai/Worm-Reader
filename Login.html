@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>System Authentication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
+        .glow-input {
+            background: rgba(10, 25, 50, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        .glow-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+    </style>
+</head>
+<body class="h-screen flex items-center justify-center px-6 bg-[url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center bg-fixed">
+    
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
+
+    <div class="relative z-10 w-full max-w-md border border-white/10 bg-black/50 p-10 rounded-lg shadow-2xl">
+        <h1 class="text-center text-blue-500 text-[10px] tracking-[0.5em] uppercase font-bold mb-8 border-b border-white/10 pb-4">System Authentication</h1>
+        
+        <form action="index.html" class="space-y-6">
+            <div>
+                <label class="block text-gray-500 text-[10px] tracking-widest uppercase mb-2">Constellation / Reader ID</label>
+                <input type="text" placeholder="Enter ID..." required class="glow-input w-full px-4 py-3 text-sm text-blue-100 placeholder-blue-900/50 rounded uppercase tracking-wider">
+            </div>
+            
+            <div>
+                <label class="block text-gray-500 text-[10px] tracking-widest uppercase mb-2">Access Passcode</label>
+                <input type="password" placeholder="••••••••" required class="glow-input w-full px-4 py-3 text-sm text-blue-100 placeholder-blue-900/50 rounded tracking-widest">
+            </div>
+
+            <button type="submit" class="w-full mt-8 border border-blue-600/50 bg-blue-900/20 hover:bg-blue-600 hover:text-white text-blue-400 py-3 text-[10px] tracking-[0.3em] uppercase transition-all duration-300">
+                Verify Identity
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>
