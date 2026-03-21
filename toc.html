@@ -6,142 +6,58 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
-        
-        body { 
-            background-color: #090005; 
-            color: #d1d5db; 
-            font-family: 'Rajdhani', sans-serif; 
-            overflow-x: hidden;
-        }
-
+        body { background-color: #090005; color: #d1d5db; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
         .bg-cyber-toc {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: 
-                linear-gradient(to right, rgba(10, 0, 5, 0.95) 0%, rgba(10, 0, 5, 0.7) 50%, rgba(0, 0, 0, 0.9) 100%),
-                url('https://i.pinimg.com/736x/f3/92/c9/f392c9ccc2e61327f29273c8af829081.jpg'); 
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to right, rgba(10, 0, 5, 0.95) 0%, rgba(10, 0, 5, 0.7) 50%, rgba(0, 0, 0, 0.9) 100%), url('https://i.pinimg.com/736x/f3/92/c9/f392c9ccc2e61327f29273c8af829081.jpg'); 
+            background-size: cover; background-position: center; z-index: -1;
         }
-
-        .text-neon-pink {
-            color: #ff2a85;
-            text-shadow: 0 0 5px rgba(255, 42, 133, 0.5), 0 0 15px rgba(255, 42, 133, 0.3);
-        }
-
-        .title-neon {
-            font-family: 'Orbitron', sans-serif;
-            color: #ff2a85;
-            text-shadow: 0 0 10px #ff2a85, 0 0 20px #ff2a85;
-        }
-
+        .text-neon-pink { color: #ff2a85; text-shadow: 0 0 5px rgba(255, 42, 133, 0.5), 0 0 15px rgba(255, 42, 133, 0.3); }
+        .title-neon { font-family: 'Orbitron', sans-serif; color: #ff2a85; text-shadow: 0 0 10px #ff2a85, 0 0 20px #ff2a85; }
         .chapter-box {
-            background-color: #050002;
-            border: 1px solid rgba(255, 42, 133, 0.2);
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
-            text-decoration: none;
-            color: inherit;
+            background-color: #050002; border: 1px solid rgba(255, 42, 133, 0.2); border-radius: 8px;
+            padding: 1.5rem 2rem; transition: all 0.3s ease; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 5px 5px 0px rgba(0,0,0,0.5); text-decoration: none; color: inherit;
         }
-
-        .chapter-box:hover {
-            border-color: #ff2a85;
-            box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3), inset 0 0 15px rgba(255, 42, 133, 0.1);
-            transform: translateX(10px);
-            color: white;
-        }
-
+        .chapter-box:hover { border-color: #ff2a85; box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3); transform: translateX(10px); color: white; }
         .btn-read {
-            display: block;
-            background-color: #050002; 
-            border: 1px solid #ff2a85; 
-            padding: 1rem 0;
-            font-size: 1.25rem; 
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            color: #ffffff; 
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-align: center;
-            transform: skew(-5deg); 
-            box-shadow: 4px 4px 0px rgba(255, 42, 133, 0.3);
-            width: 100%;
+            display: block; background-color: #050002; border: 1px solid #ff2a85; padding: 1rem 0;
+            font-size: 1.25rem; font-weight: 700; letter-spacing: 0.2em; color: #ffffff; 
+            text-transform: uppercase; transition: all 0.3s ease; cursor: pointer; text-align: center;
+            transform: skew(-5deg); box-shadow: 4px 4px 0px rgba(255, 42, 133, 0.3); width: 100%;
         }
         .btn-read span { display: inline-block; transform: skew(5deg); }
-        .btn-read:hover {
-            background-color: #ff2a85;
-            box-shadow: 4px 4px 15px #ff2a85;
-            text-shadow: 0 0 10px #fff;
-        }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050002; }
-        ::-webkit-scrollbar-thumb { background: #ff2a85; border-radius: 4px; }
+        .btn-read:hover { background-color: #ff2a85; box-shadow: 4px 4px 15px #ff2a85; text-shadow: 0 0 10px #fff; }
     </style>
 </head>
 <body class="min-h-screen relative p-6 md:p-12">
-    
     <div class="bg-cyber-toc"></div>
-
     <div class="z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 mt-8">
-        
         <div class="w-full md:w-1/3 flex flex-col shrink-0">
             <div class="relative w-full rounded-lg overflow-hidden border-2 border-pink-500 shadow-[0_0_20px_rgba(255,42,133,0.4)] mb-6">
-                <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" alt="Worm Cover" class="w-full h-auto object-cover opacity-90">
+                <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" class="w-full h-auto object-cover opacity-90">
             </div>
-
             <h1 class="title-neon text-5xl font-black uppercase tracking-[0.2em] mb-2">WORM</h1>
             <h2 class="text-pink-400 text-sm tracking-[0.4em] font-bold mb-1 uppercase">Parahumans System // Active</h2>
-            
-            <p class="text-white text-xs tracking-[0.3em] uppercase mb-6">
-                Operator: <span id="user-display" class="text-neon-pink font-bold">Checking Credentials...</span>
-            </p>
-
-            <div class="font-mono text-xs text-pink-300/70 space-y-1 mb-6">
-                <p>> AUTHOR: <span class="text-white">Wildbow</span></p>
-                <p>> STATUS: <span class="text-neon-pink">Decryption Ready</span></p>
-            </div>
-
-            <div class="text-sm leading-relaxed border-l-2 border-pink-500 pl-4 mb-8 italic text-gray-400">
-                "An introverted teenage girl with an unconventional superpower..."
-            </div>
-
-            <a href="reader.html?ch=1" class="btn-read mb-8"><span>Begin Reading</span></a>
-
-            <a href="index.html" class="font-mono text-sm text-pink-500 hover:text-white transition-colors">
-                ← RETURN TO TERMINAL
-            </a>
+            <p class="text-white text-xs tracking-[0.3em] uppercase mb-6">Operator: <span id="user-display" class="text-neon-pink font-bold">Checking...</span></p>
+            <a href="gestation1-1.html" class="btn-read mb-8"><span>Begin Reading</span></a>
+            <a href="index.html" class="font-mono text-sm text-pink-500 hover:text-white transition-colors">← RETURN TO TERMINAL</a>
         </div>
-
         <div class="w-full md:w-2/3 flex flex-col">
-            <div class="text-pink-400 text-xs tracking-[0.5em] mb-6 uppercase font-bold border-b border-pink-500/30 pb-2">
-                [ ARC 1: GESTATION ]
-            </div>
-
+            <div class="text-pink-400 text-xs tracking-[0.5em] mb-6 uppercase font-bold border-b border-pink-500/30 pb-2">[ ARC 1: GESTATION ]</div>
             <div class="flex flex-col gap-4">
-                <a href="reader.html?ch=1" class="chapter-box">
+                <a href="gestation1-1.html" class="chapter-box">
                     <span class="font-mono tracking-widest text-lg">Ch 1: Gestation 1.1</span>
                 </a>
-                
-                <a href="reader.html?ch=2" class="chapter-box">
+                <a href="gestation1-2.html" class="chapter-box">
                     <span class="font-mono tracking-widest text-lg">Ch 2: Gestation 1.2</span>
                     <span class="text-neon-pink text-xs">[ DECRYPTED ]</span>
                 </a>
             </div>
         </div>
     </div>
-
     <script>
-        const name = localStorage.getItem('storedName') || 'Guest';
-        document.getElementById('user-display').textContent = name;
+        document.getElementById('user-display').textContent = localStorage.getItem('storedName') || 'Guest';
     </script>
-
 </body>
 </html>

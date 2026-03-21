@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WORM | Gestation 1.1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap');
+        
+        /* THE FURTHEST BACK LAYER (Deep Black) */
+        body { 
+            background-color: #050002; 
+            color: #d1d5db; 
+            font-family: 'Rajdhani', sans-serif; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* THE MIDDLE LAYER (The Dark Grey Card) */
+        .reader-container {
+            width: 100%;
+            max-width: 850px;
+            background-color: #0a0a0c; /* Lighter than body for that layered look */
+            border-left: 1px solid rgba(255, 42, 133, 0.2);
+            border-right: 1px solid rgba(255, 42, 133, 0.2);
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        /* THE TEXT SETTINGS (Spacing and Font) */
+        .story-content {
+            font-size: 1.2rem;
+            line-height: 1.9; /* Wide spacing like your image */
+            color: #c9c9c9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .story-content p {
+            margin-bottom: 2.5rem; /* Chunky paragraph breaks */
+        }
+
+        .pink-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff2a85;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            text-shadow: 0 0 10px rgba(255, 42, 133, 0.6);
+            margin-bottom: 4rem;
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .nav-footer {
+            margin-top: 6rem;
+            border-top: 1px solid rgba(255, 42, 133, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .nav-btn {
+            color: #ff2a85;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.3s;
+            letter-spacing: 0.2em;
+        }
+
+        .nav-btn:hover {
+            text-shadow: 0 0 10px #ff2a85;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reader-container">
+        <div class="flex justify-between text-[10px] font-mono text-pink-500/40 mb-12 uppercase tracking-[0.5em]">
+            <span>NEURAL_LINK: ESTABLISHED</span>
+            <span id="op-display">OPERATOR: [CHECKING...]</span>
+        </div>
+
+        <h1 class="pink-title text-2xl md:text-4xl">Gestation 1.1</h1>
+
+        <div class="story-content">
+            <p>Class ended in five minutes and all I could think was, an hour is too long for lunch.</p>
+
+            <p>Since the start of the semester, I had been looking forward to the part of Mr. Gladly’s World Issues class where we’d start discussing capes. Now that it had finally arrived, I couldn’t focus. I fidgeted, my pen moving from hand to hand, tapping, or absently drawing some figure in the corner of the page to join the other doodles.</p>
+
+            <p>He was animated, clearly excited about what he was talking about, and for once, the class was listening. He was the sort of teacher who tried to be friends with his students, the sort who went by “Mr. G” instead of Mr. Gladly.</p>
+
+            <p>I glanced over my shoulder. Madison Clements sat two rows to my left and two seats back. She saw me looking and smirked, her eyes narrowing, and I lowered my eyes to my notebook. I tried to ignore the ugly, sour feeling that stewed in my stomach.</p>
+
+            <p>“Let me wrap up here,” Mr. Gladly said, “Sorry, guys, but there is homework for the weekend. Think about capes and how they’ve impacted the world around you.”</p>
+
+            <p>The bell rang with a lilting ding-dong, and I was the first one out the door. I didn’t run, but I moved at a decent clip as I headed up the stairwell to the third floor and made my way to the girl’s washroom.</p>
+
+            <p>They didn’t stop there. I managed to pull my glasses off just in time to see Madison and Sophia leaning over the top of the stall, each of them with plastic bottles at the ready. I bent over with my hands shielding my head just before they emptied the contents over me. Cranberry juice.</p>
+
+            <p>I opened my eyes. I could feel adrenaline thrumming through my body. On every surface of the bathroom were bugs; Flies, ants, spiders, centipedes, millipedes, earwigs, beetles, wasps and bees. Primitive bundles of signals and responses, waiting for further instruction.</p>
+            
+            <p>I was going to be a superhero. That was the goal I used to calm myself down at moments like these. It was something to look forward to, something to work towards. It made it possible to keep from dwelling on the fact that Emma Barnes, leader of the trio, had once been my best friend.</p>
+        </div>
+
+        <div class="nav-footer">
+            <a href="toc.html" class="nav-btn">« TERMINAL</a>
+            <a href="gestation1-2.html" class="nav-btn">NEXT_SECTOR »</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('op-display').textContent = "OPERATOR: " + (localStorage.getItem('storedName') || 'GUEST');
+    </script>
+</body>
+</html>
