@@ -2,133 +2,202 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WORM | Neon System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Cyberpunk Terminal - WORM</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
-        
-        body { 
-            background-color: #090005; 
-            color: #fff; 
-            font-family: 'Rajdhani', sans-serif; 
-            overflow-x: hidden;
+        /* Base Styles and Layout */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Consolas', 'Courier New', monospace; /* Monospace terminal font */
+            background-color: #000;
         }
 
-        /* The Cyberpunk Pinterest Background! */
-        .bg-cyber {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: 
-                linear-gradient(to bottom, rgba(15, 0, 10, 0.7), rgba(0, 0, 0, 0.95)),
-                url('https://i.pinimg.com/1200x/7b/0a/56/7b0a56f95df7e34b9dfa24c3e02cc8e4.jpg'); 
+        /* Dark blurred cityscape background */
+        .terminal-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                              url('https://images.unsplash.com/photo-1549487922-b9868e8e7b3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTkyMXwwfDF8c2VhcmNofDExfHxjaXR5c2NhcGUlMjBibHVycmVkfGVufDB8fHx8MTY3ODk4OTUzOA&ixlib=rb-4.0.3&q=80&w=1920');
             background-size: cover;
             background-position: center;
-            z-index: -1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 40px;
         }
 
-        /* Massive, glowing title - SPREAD OUT */
-        .title-neon {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 6rem; 
-            font-weight: 900;
-            color: #ff2a85;
-            text-transform: uppercase;
-            letter-spacing: 0.4em; 
-            text-shadow: 0 0 10px #ff2a85, 0 0 30px #ff2a85, 0 0 60px #ff2a85;
-            margin-bottom: 3rem;
-            margin-left: 0.4em; 
+        /* Common pink text style */
+        .pink-text {
+            color: #ff00ff; /* Hot Pink */
+            text-shadow: 0 0 5px #ff00ff;
+            font-size: 14px;
+            letter-spacing: 1.5px;
         }
 
-        /* The Gritty Black Boxes for the Menu Links */
-        .menu-item {
-            display: block;
-            background-color: #050002; 
-            border: 1px solid rgba(255, 42, 133, 0.3); 
-            padding: 1rem 3rem;
-            font-size: 1.5rem; 
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            color: #ffffff; /* Changed to white so you can actually read it! */
-            text-shadow: 0 0 5px rgba(255, 42, 133, 0.5); /* Subtle pink glow */
+        /* Top Bar Flex Layout */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        /* Main WORM title with correct styling */
+        .worm-title {
+            font-size: 120px;
+            font-weight: bold;
             text-transform: uppercase;
-            transition: all 0.3s ease;
-            margin-bottom: 1.5rem;
+            color: #ff00ff; /* Solid Pink Fill as requested */
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; /* Powerful neon glow */
+            letter-spacing: 15px;
+            margin: 0;
+            position: absolute;
+            top: 100px;
+            z-index: 10;
+        }
+
+        /* Main central glowing box */
+        .glowing-box {
+            border: 4px solid #ff00ff;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+            width: 600px;
+            height: 350px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 5;
+            margin-top: 150px;
+        }
+
+        /* Button rows with icons */
+        .button-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        /* Skewed buttons */
+        .terminal-button {
+            flex-grow: 1;
+            background-color: #000;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
             cursor: pointer;
             text-align: center;
-            transform: skew(-5deg); 
-            box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3);
-            width: 100%;
-            max-width: 400px; /* Keeps the buttons from stretching too wide now that the box is gone */
+            font-size: 18px;
+            letter-spacing: 2px;
+            position: relative;
+            transform: skew(-20deg); /* Button skew */
+            box-sizing: border-box;
         }
 
-        /* Un-skews the text inside so it's readable */
-        .menu-item span {
+        /* Correct button text (un-skew text) */
+        .terminal-button span {
             display: inline-block;
-            transform: skew(5deg);
+            transform: skew(20deg); /* Un-skew button text */
         }
 
-        /* Neon Hover Effect on the Black Boxes */
-        .menu-item:hover {
-            background-color: #ff2a85;
-            color: #fff;
-            border-color: #ff2a85;
-            text-shadow: 0 0 10px #fff;
-            box-shadow: 5px 5px 15px #ff2a85;
-            transform: skew(-5deg) scale(1.05);
+        /* Button content flex centering */
+        .terminal-button span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
         }
 
-        /* The Pink Scrolling Thingy */
-        ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: #090005; }
-        ::-webkit-scrollbar-thumb { 
-            background: #ff2a85; 
-            border-radius: 10px; 
-            border: 2px solid #090005;
+        /* Icons as dark images with subtle shade */
+        .icon {
+            width: 24px;
+            height: 24px;
+            filter: invert(1); /* Invert to make dark icons visible but shaded */
+            opacity: 0.5; /* Shaded dark appearance */
         }
-        ::-webkit-scrollbar-thumb:hover { background: #ff7ebb; box-shadow: 0 0 10px #ff2a85; }
+
+        /* Bottom flex layout */
+        .bottom-bar {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            gap: 10px;
+            text-align: center;
+        }
+
+        /* Time variable (can be updated dynamically) */
+        .sys-time {
+            color: #ff00ff;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center relative p-6">
-    
-    <div class="bg-cyber"></div>
+<body>
 
-    <div id="cyber-clock" class="absolute top-6 right-6 font-mono text-pink-500 text-lg tracking-widest animate-pulse font-bold">
-        [ SYS.TIME: 00:00:00 ]
-    </div>
+    <div class="terminal-container">
 
-    <div class="fixed bottom-4 right-4 z-50 opacity-50 hover:opacity-100 transition-opacity duration-300">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/5KilCgRRg48F8y78hSodx4" width="250" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-
-    <div class="z-10 flex flex-col items-center w-full max-w-3xl">
-        
-        <div class="text-pink-400 text-sm tracking-[0.5em] mb-4 uppercase font-bold text-shadow-md">
-            [ Neural Network: Online ]
+        <div class="top-bar">
+            <div class="pink-text">[ NEURAL NETWORK: ONLINE ]</div>
+            <div class="pink-text">[ SYS.TIME: <span id="time" class="sys-time">22:04</span> ]</div>
         </div>
 
-        <h1 class="title-neon">WORM</h1>
+        <h1 class="worm-title">WORM</h1>
 
-        <nav class="flex flex-col items-center w-full mt-4">
-            <a href="login.html" class="menu-item"><span>System Login</span></a>
-            <a href="toc.html" class="menu-item"><span>Access Library</span></a>
-            <a href="#" class="menu-item opacity-50 cursor-not-allowed"><span>Options</span></a>
-        </nav>
+        <div class="glowing-box">
+            <div class="button-row">
+                <button class="terminal-button"><span>SYSTEM LOGIN</span></button>
+                <img src="https://img.icons8.com/material-rounded/24/000000/lock.png" alt="Lock Icon" class="icon">
+            </div>
+            <div class="button-row">
+                <button class="terminal-button"><span>ACCESS LIBRARY</span></button>
+                <img src="https://img.icons8.com/material-rounded/24/000000/folder-invoices.png" alt="Folder Icon" class="icon">
+            </div>
+            <div class="button-row">
+                <button class="terminal-button"><span>OPTIONS</span></button>
+                <img src="https://img.icons8.com/material-rounded/24/000000/settings.png" alt="Gear Icon" class="icon">
+            </div>
+        </div>
 
-        <div class="mt-16 text-pink-300/60 text-xs tracking-[0.4em] uppercase font-bold text-center">
-            System Version 2.0.1 <br><br>
-            <span class="text-pink-500">This project was created by zenith786</span>
+        <div class="bottom-bar">
+            <div class="pink-text">SYSTEM VERSION 2.0.1</div>
+            <div class="pink-text">THIS PROJECT WAS CREATED BY zenith786</div>
         </div>
 
     </div>
 
     <script>
-        function updateClock() {
+        function updateTime() {
+            const timeSpan = document.getElementById('time');
             const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
-            document.getElementById('cyber-clock').textContent = `[ SYS.TIME: ${timeString} ]`;
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeSpan.textContent = `${hours}:${minutes}`;
         }
-        setInterval(updateClock, 1000);
-        updateClock(); 
+        setInterval(updateTime, 1000); // Update every second
+        updateTime(); // Initial update
     </script>
 </body>
 </html>
