@@ -2,99 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WORM | System Terminal</title>
+    <title>WORM | Neon System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=JetBrains+Mono:wght@100;400;700&display=swap');
+        /* Importing absolute Cyberpunk fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
         
         body { 
-            background-color: #020202; 
+            background-color: #090005; 
             color: #fff; 
-            font-family: 'JetBrains Mono', monospace; 
-            overflow: hidden; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden;
         }
 
-        /* Techy Batcomputer / Dark System Background */
-        .bg-tech {
-            position: absolute;
+        /* Cyberpunk Pink City Background */
+        .bg-cyber {
+            position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             background: 
-                radial-gradient(circle at center, rgba(10, 25, 50, 0.9) 0%, rgba(0,0,0,1) 100%),
-                url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop');
+                linear-gradient(to bottom, rgba(15, 0, 10, 0.8), rgba(0, 0, 0, 0.95)),
+                url('https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
-            background-blend-mode: overlay;
+            background-position: center;
             z-index: -1;
-            opacity: 0.5;
         }
 
-        /* The Title: Elegant but glowing like a system error */
-        .title-glitch {
-            font-family: 'Crimson Pro', serif;
-            font-size: 7rem;
-            letter-spacing: 0.3em;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.2);
-            margin-left: 0.3em; /* Fixes centering with letter-spacing */
+        /* Massive, glowing title */
+        .title-neon {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 6rem; /* HUGE text */
+            font-weight: 900;
+            color: #ff2a85;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 10px #ff2a85, 0 0 30px #ff2a85, 0 0 60px #ff2a85;
+            margin-bottom: 1rem;
         }
 
-        /* Resident Evil style menu links */
+        /* The Hot Neon Box */
+        .neon-box {
+            border: 3px solid #ff2a85;
+            background: rgba(255, 42, 133, 0.05);
+            box-shadow: 0 0 20px rgba(255, 42, 133, 0.5), inset 0 0 20px rgba(255, 42, 133, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 3rem 4rem;
+            border-radius: 16px;
+            width: 100%;
+            max-w: 600px;
+        }
+
+        /* Bigger, bolder menu links */
         .menu-item {
-            display: inline-block;
-            font-size: 0.85rem;
-            letter-spacing: 0.4em;
-            color: #6b7280;
+            display: block;
+            font-size: 1.75rem; /* MUCH bigger so you can see it */
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: #fbcfe8;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             cursor: pointer;
             position: relative;
+            text-align: center;
         }
 
-        /* Hover effect: Turns ORV Blue and adds the ">" cursor */
+        .menu-item:last-child { margin-bottom: 0; }
+
+        /* Neon Hover Effect */
         .menu-item:hover {
-            color: #60a5fa;
-            text-shadow: 0 0 15px rgba(96, 165, 250, 0.8);
+            color: #fff;
+            text-shadow: 0 0 15px #ff2a85, 0 0 30px #ff2a85;
             transform: scale(1.05);
         }
 
         .menu-item::before {
-            content: "> ";
+            content: ">> ";
             position: absolute;
-            left: -25px;
+            left: 10%;
             opacity: 0;
-            color: #3b82f6;
+            color: #ff2a85;
             transition: opacity 0.3s;
+            text-shadow: 0 0 10px #ff2a85;
         }
 
-        .menu-item:hover::before {
-            opacity: 1;
+        .menu-item:hover::before { opacity: 1; }
+
+        /* The Pink Scrolling Thingy */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #090005; }
+        ::-webkit-scrollbar-thumb { 
+            background: #ff2a85; 
+            border-radius: 10px; 
+            border: 2px solid #090005;
         }
+        ::-webkit-scrollbar-thumb:hover { background: #ff7ebb; box-shadow: 0 0 10px #ff2a85; }
     </style>
 </head>
-<body class="h-screen flex flex-col items-center justify-center relative">
+<body class="min-h-screen flex flex-col items-center justify-center relative p-6">
     
-    <div class="bg-tech"></div>
+    <div class="bg-cyber"></div>
 
-    <div class="text-center z-10 flex flex-col items-center w-full max-w-2xl">
+    <div id="cyber-clock" class="absolute top-6 right-6 font-mono text-pink-500 text-lg tracking-widest animate-pulse font-bold text-shadow-md">
+        [ SYS.TIME: 00:00:00 ]
+    </div>
+
+    <div class="z-10 flex flex-col items-center w-full max-w-3xl">
         
-        <div class="text-blue-500 text-[10px] tracking-[0.5em] mb-4 uppercase animate-pulse">
-            [ System Diagnostics: Online ]
+        <div class="text-pink-400 text-sm tracking-[0.5em] mb-2 uppercase font-bold">
+            [ Neural Network: Online ]
         </div>
 
-        <h1 class="title-glitch mb-16 uppercase">WORM</h1>
+        <h1 class="title-neon">WORM</h1>
 
-        <nav class="flex flex-col items-center space-y-2">
-            <a href="login.html" class="menu-item">System Login</a>
-            
-            <a href="toc.html" class="menu-item">Access Library</a>
-            
-            <a href="#" class="menu-item opacity-50 cursor-not-allowed">Options</a>
-        </nav>
+        <div class="neon-box mt-8">
+            <nav class="flex flex-col items-center">
+                <a href="login.html" class="menu-item">System Login</a>
+                <a href="toc.html" class="menu-item">Access Library</a>
+                <a href="#" class="menu-item opacity-50 cursor-not-allowed">Options</a>
+            </nav>
+        </div>
 
-        <div class="mt-32 text-gray-700 text-[9px] tracking-[0.5em] uppercase">
-            System Version 1.0.4 • Wildbow
+        <div class="mt-20 text-pink-300/60 text-xs tracking-[0.4em] uppercase font-bold text-center">
+            System Version 2.0.1 <br><br>
+            <span class="text-pink-500">This project was created by zenith786</span>
         </div>
 
     </div>
 
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('cyber-clock').textContent = `[ SYS.TIME: ${timeString} ]`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Run immediately so it doesn't wait 1 second to appear
+    </script>
 </body>
 </html>
