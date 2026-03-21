@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORM | Parahumans Reader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+        
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: #0d0d0d; 
+            color: #d1d1d1; 
+            font-family: 'Merriweather', serif; 
+            line-height: 2; 
+        }
+
+        /* The "ORV" System Message Style */
+        .system-window {
+            background: rgba(30, 58, 138, 0.1);
+            border: 1px solid #1e40af;
+            padding: 20px;
+            margin: 40px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(30, 58, 138, 0.2);
+        }
+
+        .fanart img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="max-w-2xl mx-auto px-6 py-20">
+
+    <div id="progress" class="fixed top-0 left-0 h-1 bg-blue-600 z-50" style="width: 0%"></div>
+
+    <h1 class="text-4xl font-bold text-white text-center mb-16 tracking-tighter">GESTATION 1.1</h1>
+
+    <div class="chapter-content text-lg">
+        <p class="mb-8">Class ended in five minutes and all I could think was, <em>stay focused</em>.</p>
+
+        <div class="system-window">
+            <span class="text-blue-500 font-bold uppercase text-xs tracking-widest">[ SYSTEM ALERT ]</span>
+            <p class="mt-2 italic text-blue-100">"The swarm is listening. Haki/Compulsion detected in the vicinity."</p>
+        </div>
+
+        <p class="mb-8">I looked out the window...</p>
+
+        <div class="fanart">
+            <img src="https://via.placeholder.com/800x450/111/444?text=Insert+Pinterest+Art+Link+Here" alt="Chapter Art">
+        </div>
+    </div>
+
+    <script>
+        window.onscroll = () => {
+            let winScroll = document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
