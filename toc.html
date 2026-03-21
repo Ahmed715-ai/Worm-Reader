@@ -37,8 +37,8 @@
             backdrop-filter: blur(4px);
         }
 
-        /* Glowing hover effect */
-        .chapter-box:hover {
+        /* Glowing hover effect for unlocked chapters */
+        .chapter-box:hover:not(.locked-glitch) {
             border-color: #3b82f6;
             color: #fff;
             background: rgba(59, 130, 246, 0.1);
@@ -51,6 +51,31 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+
+        /* THE GLITCH EFFECT FOR LOCKED CHAPTERS (Moved inside style tag!) */
+        .locked-glitch {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .locked-glitch:hover {
+            color: #ef4444; /* Turns Red */
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            transform: translate(2px, 2px);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+        }
+        .locked-glitch:hover::after {
+            content: "[ ACCESS DENIED ]";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #ef4444;
+            letter-spacing: 0.2em;
+        }
     </style>
 </head>
 <body class="bg-stars">
@@ -64,8 +89,8 @@
             <p class="text-blue-500 text-[10px] tracking-[0.3em] uppercase font-bold mb-6">Omniscient Reader's Viewpoint</p>
             
             <div class="space-y-1 text-xs text-gray-400 mb-6 font-mono tracking-wide">
-                <p><span class="text-gray-600">Author:</span> Wildbow (TVD Edit)</p>
-                <p><span class="text-gray-600">Chapters:</span> 1 (Ongoing)</p>
+                <p><span class="text-gray-600">Author:</span> Wildbow</p>
+                <p><span class="text-gray-600">Chapters:</span> 2 (Ongoing)</p>
                 <p><span class="text-gray-600">Status:</span> System Active</p>
             </div>
 
@@ -87,11 +112,13 @@
             
             <div class="flex flex-col h-[70vh] overflow-y-auto pr-4 pb-20">
                 <a href="chapter1-1.html" class="chapter-box">Ch 1: Ep. 1 - Gestation, I</a>
-                <a href="#" class="chapter-box opacity-50 cursor-not-allowed">Ch 2: Ep. 1 - Gestation, II</a>
-                <a href="#" class="chapter-box opacity-50 cursor-not-allowed">Ch 3: Ep. 1 - Gestation, III</a>
-                <a href="#" class="chapter-box opacity-50 cursor-not-allowed">Ch 4: Ep. 1 - Gestation, IV</a>
-                <a href="#" class="chapter-box opacity-50 cursor-not-allowed">Ch 5: Ep. 1 - Gestation, V</a>
-                <a href="#" class="chapter-box opacity-50 cursor-not-allowed">Ch 6: Ep. 1 - Gestation, VI</a>
+                
+                <a href="chapter1-2.html" class="chapter-box">Ch 2: Ep. 1 - Gestation, II</a>
+                
+                <a href="#" class="chapter-box opacity-50 cursor-not-allowed locked-glitch">Ch 3: Ep. 1 - Gestation, III</a>
+                <a href="#" class="chapter-box opacity-50 cursor-not-allowed locked-glitch">Ch 4: Ep. 1 - Gestation, IV</a>
+                <a href="#" class="chapter-box opacity-50 cursor-not-allowed locked-glitch">Ch 5: Ep. 1 - Gestation, V</a>
+                <a href="#" class="chapter-box opacity-50 cursor-not-allowed locked-glitch">Ch 6: Ep. 1 - Gestation, VI</a>
             </div>
         </div>
 
