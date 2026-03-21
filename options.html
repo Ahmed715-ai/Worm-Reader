@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WORM | System Diagnostics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
+        
+        body { 
+            background-color: #090005; 
+            color: #fff; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden;
+        }
+
+        /* The Cyberpunk Pinterest Background */
+        .bg-cyber {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                linear-gradient(to bottom, rgba(15, 0, 10, 0.7), rgba(0, 0, 0, 0.95)),
+                url('https://i.pinimg.com/1200x/7b/0a/56/7b0a56f95df7e34b9dfa24c3e02cc8e4.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        /* The Terminal Box */
+        .terminal-box {
+            background-color: rgba(5, 0, 2, 0.85);
+            border: 2px solid #ff2a85;
+            box-shadow: 0 0 20px rgba(255, 42, 133, 0.3), inset 0 0 15px rgba(255, 42, 133, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Scanline Effect */
+        .scanline {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 42, 133, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 4s linear infinite;
+            box-shadow: 0 0 10px #ff2a85;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        /* Blinking Cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background-color: #ff2a85;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* The Neon Return Button */
+        .btn-return {
+            display: block;
+            background-color: #050002; 
+            border: 1px solid rgba(255, 42, 133, 0.3); 
+            padding: 1rem 3rem;
+            font-size: 1.25rem; 
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: #ffffff; 
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            transform: skew(-5deg); 
+            box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3);
+            margin-top: 2rem;
+        }
+        .btn-return span { display: inline-block; transform: skew(5deg); }
+        .btn-return:hover {
+            background-color: #ff2a85;
+            box-shadow: 5px 5px 15px #ff2a85;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        /* The Pink Scrolling Thingy */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #090005; }
+        ::-webkit-scrollbar-thumb { background: #ff2a85; border-radius: 10px; border: 2px solid #090005;}
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center relative p-6">
+    
+    <div class="bg-cyber"></div>
+
+    <div class="z-10 w-full max-w-3xl flex flex-col items-center">
+        
+        <h1 class="font-['Orbitron'] text-4xl font-black text-[#ff2a85] tracking-[0.3em] uppercase mb-8 text-shadow-md" style="text-shadow: 0 0 15px #ff2a85;">
+            System Diagnostics
+        </h1>
+
+        <div class="terminal-box w-full p-8 rounded-lg font-mono text-lg text-pink-300 tracking-wider leading-loose">
+            <div class="scanline"></div>
+            
+            <p class="text-white mb-4">> INITIALIZING PROTOCOL...</p>
+            <p>> PINGING SERVER: <span class="text-[#ff2a85] font-bold">[ OK ]</span></p>
+            <p>> LOCATING NODE: <span class="text-[#ff2a85] font-bold">EARTH BET // BROCKTON BAY</span></p>
+            <p>> NEURAL LINK STATUS: <span class="text-[#ff2a85] font-bold">ACTIVE</span></p>
+            <p>> CURRENT USER: <span class="text-white font-bold">T. HEBERT</span></p>
+            <p>> PASSENGER STATUS: <span class="text-[#ff2a85] font-bold animate-pulse">AWAKE</span></p>
+            <p class="mt-4">> THREAT LEVEL DETECTED: <span class="text-red-500 font-bold bg-red-500/20 px-2 py-1">CLASS S</span></p>
+            <p class="mt-4">> WAITING FOR COMMAND<span class="cursor"></span></p>
+        </div>
+
+        <a href="index.html" class="btn-return"><span>Return to Main Menu</span></a>
+
+    </div>
+
+</body>
+</html>
