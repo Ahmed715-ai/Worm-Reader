@@ -2,46 +2,135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>System Authentication</title>
+    <title>WORM | System Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
-        .glow-input {
-            background: rgba(10, 25, 50, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
+        
+        body { 
+            background-color: #090005; 
+            color: #fff; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow: hidden;
+        }
+
+        .bg-cyber {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                linear-gradient(to bottom, rgba(15, 0, 10, 0.7), rgba(0, 0, 0, 0.95)),
+                url('https://i.pinimg.com/1200x/7b/0a/56/7b0a56f95df7e34b9dfa24c3e02cc8e4.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .login-box {
+            background-color: rgba(5, 0, 2, 0.85);
+            border: 2px solid #ff2a85;
+            box-shadow: 0 0 20px rgba(255, 42, 133, 0.3), inset 0 0 15px rgba(255, 42, 133, 0.2);
+        }
+
+        .neon-input {
+            background-color: #050002;
+            border: 1px solid rgba(255, 42, 133, 0.5);
+            color: #ff2a85;
+            font-family: 'Orbitron', sans-serif;
+            outline: none;
             transition: all 0.3s ease;
         }
-        .glow-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+
+        .neon-input:focus {
+            border-color: #ff2a85;
+            box-shadow: 0 0 10px rgba(255, 42, 133, 0.8);
+        }
+
+        .btn-skew {
+            display: inline-block;
+            background-color: #050002; 
+            border: 1px solid rgba(255, 42, 133, 0.3); 
+            padding: 1rem 2rem;
+            font-size: 1.25rem; 
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #ffffff; 
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            transform: skew(-5deg); 
+            box-shadow: 4px 4px 0px rgba(255, 42, 133, 0.3);
+            width: 100%;
+        }
+
+        .btn-skew span { display: inline-block; transform: skew(5deg); }
+        .btn-skew:hover {
+            background-color: #ff2a85;
+            box-shadow: 4px 4px 15px #ff2a85;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        #loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: black;
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
-<body class="h-screen flex items-center justify-center px-6 bg-[url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center bg-fixed">
+<body class="min-h-screen flex flex-col items-center justify-center relative p-6">
     
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
+    <div class="bg-cyber"></div>
 
-    <div class="relative z-10 w-full max-w-md border border-white/10 bg-black/50 p-10 rounded-lg shadow-2xl">
-        <h1 class="text-center text-blue-500 text-[10px] tracking-[0.5em] uppercase font-bold mb-8 border-b border-white/10 pb-4">System Authentication</h1>
-        
-        <form action="index.html" class="space-y-6">
-            <div>
-                <label class="block text-gray-500 text-[10px] tracking-widest uppercase mb-2">Constellation / Reader ID</label>
-                <input type="text" placeholder="Enter ID..." required class="glow-input w-full px-4 py-3 text-sm text-blue-100 placeholder-blue-900/50 rounded uppercase tracking-wider">
-            </div>
-            
-            <div>
-                <label class="block text-gray-500 text-[10px] tracking-widest uppercase mb-2">Access Passcode</label>
-                <input type="password" placeholder="••••••••" required class="glow-input w-full px-4 py-3 text-sm text-blue-100 placeholder-blue-900/50 rounded tracking-widest">
-            </div>
-
-            <button type="submit" class="w-full mt-8 border border-blue-600/50 bg-blue-900/20 hover:bg-blue-600 hover:text-white text-blue-400 py-3 text-[10px] tracking-[0.3em] uppercase transition-all duration-300">
-                Verify Identity
-            </button>
-        </form>
+    <div id="loading-overlay">
+        <div class="text-[#ff2a85] font-['Orbitron'] text-2xl animate-pulse mb-4 tracking-[0.5em]">ACCESS GRANTED</div>
+        <div class="w-64 h-1 bg-gray-900 overflow-hidden">
+            <div class="h-full bg-[#ff2a85] transition-all duration-1000 w-0" id="progress-bar"></div>
+        </div>
     </div>
 
+    <div class="z-10 w-full max-w-md flex flex-col items-center">
+        <h1 class="font-['Orbitron'] text-4xl font-black text-[#ff2a85] tracking-[0.2em] uppercase mb-2 text-shadow-md text-center">Authorization</h1>
+        <p class="text-pink-400 text-sm tracking-[0.3em] mb-8 uppercase font-bold text-center">[ Secure Neural Uplink ]</p>
+
+        <div class="login-box w-full p-8 rounded-lg flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+                <label class="text-white text-sm tracking-[0.2em] uppercase font-bold">User Designation</label>
+                <input type="text" id="userID" placeholder="ID-NUMBER" class="neon-input w-full p-3 text-lg rounded-sm uppercase">
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <label class="text-white text-sm tracking-[0.2em] uppercase font-bold">Passcode</label>
+                <input type="password" id="userPass" placeholder="••••••••" class="neon-input w-full p-3 text-lg rounded-sm">
+            </div>
+
+            <button onclick="fakeLogin()" class="btn-skew mt-4"><span>Authenticate</span></button>
+            
+            <div class="flex justify-between items-center mt-2">
+                <a href="index.html" class="text-pink-400 hover:text-white text-xs tracking-widest uppercase">< Return to Menu</a>
+                <a href="toc.html" class="text-pink-400 hover:text-white text-xs tracking-widest uppercase">Guest Override ></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fakeLogin() {
+            // Show the loading screen
+            document.getElementById('loading-overlay').style.display = 'flex';
+            const bar = document.getElementById('progress-bar');
+            
+            // Animate the bar
+            setTimeout(() => { bar.style.width = '100%'; }, 100);
+            
+            // Redirect after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = "toc.html";
+            }, 1500);
+        }
+    </script>
 </body>
 </html>
