@@ -100,7 +100,7 @@
         <div class="login-box w-full p-8 rounded-lg flex flex-col gap-6">
             <div class="flex flex-col gap-2">
                 <label class="text-white text-sm tracking-[0.2em] uppercase font-bold">User Designation</label>
-                <input type="text" id="userID" placeholder="ID-NUMBER" class="neon-input w-full p-3 text-lg rounded-sm uppercase">
+                <input type="text" id="userID" placeholder="ENTER NAME" class="neon-input w-full p-3 text-lg rounded-sm uppercase">
             </div>
 
             <div class="flex flex-col gap-2">
@@ -112,14 +112,20 @@
             
             <div class="flex justify-between items-center mt-2">
                 <a href="index.html" class="text-pink-400 hover:text-white text-xs tracking-widest uppercase">< Return to Menu</a>
-                <a href="toc.html" class="text-pink-400 hover:text-white text-xs tracking-widest uppercase">Guest Override ></a>
+                <a href="#" onclick="fakeLogin('Guest')" class="text-pink-400 hover:text-white text-xs tracking-widest uppercase">Guest Override ></a>
             </div>
         </div>
     </div>
 
     <script>
-        function fakeLogin() {
-            // Show the loading screen
+        function fakeLogin(overrideName) {
+            // 1. Grab the name. If 'Guest' was clicked, use that. Otherwise grab the input.
+            const nameToStore = overrideName || document.getElementById('userID').value || 'Operator';
+            
+            // 2. Save it to the browser memory
+            localStorage.setItem('storedName', nameToStore);
+
+            // 3. Show the loading screen
             document.getElementById('loading-overlay').style.display = 'flex';
             const bar = document.getElementById('progress-bar');
             
