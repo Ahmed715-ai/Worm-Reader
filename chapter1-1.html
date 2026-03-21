@@ -2,31 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORM | Parahumans Special Edition</title>
+    <title>1.01 Gestation | WORM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* ORV STYLE FONTS */
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;700&display=swap');
         
-        html { scroll-behavior: smooth; }
-        
         body { 
-            background-color: #050505; /* True ORV Dark Mode */
+            background-color: #050505; 
             color: #d1d1d1; 
-            font-family: 'Crimson Pro', serif; /* The "Book" Font */
+            font-family: 'Crimson Pro', serif; 
             line-height: 1.85; 
             -webkit-font-smoothing: antialiased;
         }
 
-        /* The Blue ORV System Window */
+        /* Pure ORV System Alert Box */
         .system-window {
             background: rgba(10, 25, 50, 0.4);
             border: 1px solid rgba(59, 130, 246, 0.5);
             padding: 24px;
             margin: 45px 0;
             border-radius: 4px;
-            box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.1), 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.1);
         }
 
         .system-header {
@@ -41,89 +37,50 @@
             padding-bottom: 4px;
         }
 
-        /* Clean Next Chapter Button */
-        .next-btn {
-            display: inline-block;
-            border: 1px solid #333;
-            padding: 12px 40px;
-            color: #888;
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.8rem;
-        }
-
-        .next-btn:hover {
-            border-color: #3b82f6;
-            color: #fff;
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        /* Scrollbar styling */
+        /* CHEAT CODE: This automatically spaces your paragraphs so pasting is easy! */
+        p { margin-bottom: 1.5rem; }
+        
+        /* Custom scrollbar to match the library */
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #1e40af; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1e3a8a; }
     </style>
 </head>
-<body class="max-w-2xl mx-auto px-6 py-24 relative">
+<body class="max-w-2xl mx-auto px-6 py-12">
 
-    <div id="progress" class="fixed top-0 left-0 h-[2px] bg-blue-600 z-50 transition-all duration-200" style="width: 0%"></div>
+    <nav class="mb-20 flex justify-between items-center font-sans text-[10px] tracking-widest uppercase border-b border-white/5 pb-6">
+        <a href="toc.html" class="text-gray-500 hover:text-white transition-colors">← Return to Library</a>
+        <span class="text-blue-900 font-bold">System Active</span>
+    </nav>
 
     <header class="mb-20 text-center">
-        <h1 class="text-white text-3xl font-normal tracking-[0.1em] mb-2 uppercase">Gestation 1.1</h1>
-        <div class="w-12 h-[1px] bg-blue-900 mx-auto"></div>
+        <h1 class="text-white text-3xl font-normal tracking-[0.2em] mb-6 uppercase">1.01 Gestation</h1>
+        <div class="w-12 h-[1px] bg-blue-800 mx-auto"></div>
     </header>
 
-    <div class="chapter-body text-[1.15rem]">
+    <div class="text-[1.15rem]">
         
-        <p class="mb-10 text-white font-medium">Class ended in five minutes and all I could think was, <em class="italic">stay focused</em>.</p>
-
-        <p class="mb-8">I looked at the clock. It felt like time was stretching, a physical thing that refused to move. I was Taylor Hebert, and I was counting down the seconds until I could disappear.</p>
+        <p>Class ended in five minutes and all I could think was, <em class="text-white">stay focused</em>.</p>
+        
+        <p>I looked at the clock. It felt like time was stretching, a physical thing that refused to move. I was Taylor Hebert, and I was counting down the seconds until I could disappear.</p>
 
         <div class="system-window">
             <span class="system-header">[ SYSTEM NOTIFICATION ]</span>
-            <p class="italic text-blue-100">"The swarm is listening. Every flutter of a wing, every crawl of a leg—it is yours to command."</p>
+            <p class="italic text-blue-100 m-0">"The swarm is listening. Every flutter of a wing, every crawl of a leg—it is yours to command."</p>
         </div>
 
-        <p class="mb-8">The hallway was a gauntlet. I knew where they would be. Madison, Sophia, Emma. I knew the weight of the silence that followed me, heavier than any physical burden.</p>
+        <p>The hallway was a gauntlet. I knew where they would be. Madison, Sophia, Emma. I knew the weight of the silence that followed me, heavier than any physical burden.</p>
+
+        <p class="text-gray-600 italic mt-10">...[Paste the rest of the chapter here]...</p>
+
+    </div>
+    <div class="mt-32 mb-16 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 font-sans">
+        <a href="toc.html" class="text-gray-500 hover:text-white text-[10px] tracking-widest uppercase transition-colors">← Library</a>
         
-        <p class="mb-12 italic text-gray-400">...[Paste more of the Worm chapter text here]...</p>
-
+        <a href="chapter1-2.html" class="border border-blue-900/50 hover:border-blue-500 hover:bg-blue-900/10 text-blue-400 px-10 py-4 text-[10px] tracking-[0.2em] uppercase transition-all rounded-sm shadow-[0_0_15px_rgba(59,130,246,0.05)]">
+            Next Chapter →
+        </a>
     </div>
-
-    <div class="mt-24 mb-32 text-center">
-        <p class="text-gray-600 text-xs tracking-widest uppercase mb-6">Chapter Complete</p>
-        <a href="chapter2.html" class="next-btn">Continue to 1.2</a>
-    </div>
-
-    <div id="nav-menu" class="fixed inset-0 bg-black/98 z-[60] hidden flex-col items-center justify-center space-y-8">
-        <button onclick="toggleMenu()" class="absolute top-10 right-10 text-gray-500 text-xs tracking-widest uppercase">Close</button>
-        <h2 class="text-blue-500 text-[10px] tracking-[0.5em] uppercase font-bold mb-6">Contents</h2>
-        <a href="index.html" class="text-white hover:text-blue-400 text-xl">1.1 Gestation</a>
-        <a href="chapter2.html" class="text-gray-500 hover:text-white text-xl">1.2 Gestation</a>
-        <a href="#" class="text-gray-700 text-xl">1.3 Gestation</a>
-        <div class="pt-8 opacity-20"><hr class="w-20 border-white"></div>
-    </div>
-
-    <button onclick="toggleMenu()" class="fixed bottom-10 right-10 text-blue-600 font-bold tracking-widest text-[10px] uppercase border border-blue-900/50 bg-black/50 backdrop-blur px-5 py-3 rounded-sm hover:border-blue-500 transition-colors z-50">
-        Index
-    </button>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('nav-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-        }
-
-        window.onscroll = () => {
-            let winScroll = document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progress").style.width = scrolled + "%";
-        };
-    </script>
 
 </body>
 </html>
