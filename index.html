@@ -19,7 +19,7 @@
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             background: 
-                linear-gradient(to bottom, rgba(15, 0, 10, 0.8), rgba(0, 0, 0, 0.95)),
+                linear-gradient(to bottom, rgba(15, 0, 10, 0.7), rgba(0, 0, 0, 0.95)),
                 url('https://i.pinimg.com/1200x/7b/0a/56/7b0a56f95df7e34b9dfa24c3e02cc8e4.jpg'); 
             background-size: cover;
             background-position: center;
@@ -35,20 +35,8 @@
             text-transform: uppercase;
             letter-spacing: 0.4em; 
             text-shadow: 0 0 10px #ff2a85, 0 0 30px #ff2a85, 0 0 60px #ff2a85;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             margin-left: 0.4em; 
-        }
-
-        /* The Hot Neon Box */
-        .neon-box {
-            border: 3px solid #ff2a85;
-            background: rgba(255, 42, 133, 0.02);
-            box-shadow: 0 0 20px rgba(255, 42, 133, 0.4), inset 0 0 15px rgba(255, 42, 133, 0.1);
-            backdrop-filter: blur(4px);
-            padding: 3rem 4rem;
-            border-radius: 16px;
-            width: 100%;
-            max-w: 600px;
         }
 
         /* The Gritty Black Boxes for the Menu Links */
@@ -60,14 +48,17 @@
             font-size: 1.5rem; 
             font-weight: 700;
             letter-spacing: 0.2em;
-            color: #fbcfe8;
+            color: #ffffff; /* Changed to white so you can actually read it! */
+            text-shadow: 0 0 5px rgba(255, 42, 133, 0.5); /* Subtle pink glow */
             text-transform: uppercase;
             transition: all 0.3s ease;
             margin-bottom: 1.5rem;
             cursor: pointer;
             text-align: center;
             transform: skew(-5deg); 
-            box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.2);
+            box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3);
+            width: 100%;
+            max-width: 400px; /* Keeps the buttons from stretching too wide now that the box is gone */
         }
 
         /* Un-skews the text inside so it's readable */
@@ -75,8 +66,6 @@
             display: inline-block;
             transform: skew(5deg);
         }
-
-        .menu-item:last-child { margin-bottom: 0; }
 
         /* Neon Hover Effect on the Black Boxes */
         .menu-item:hover {
@@ -107,6 +96,10 @@
         [ SYS.TIME: 00:00:00 ]
     </div>
 
+    <div class="fixed bottom-4 right-4 z-50 opacity-50 hover:opacity-100 transition-opacity duration-300">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/5KilCgRRg48F8y78hSodx4" width="250" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+
     <div class="z-10 flex flex-col items-center w-full max-w-3xl">
         
         <div class="text-pink-400 text-sm tracking-[0.5em] mb-4 uppercase font-bold text-shadow-md">
@@ -115,13 +108,11 @@
 
         <h1 class="title-neon">WORM</h1>
 
-        <div class="neon-box mt-4">
-            <nav class="flex flex-col items-center w-full px-8">
-                <a href="login.html" class="menu-item w-full"><span>System Login</span></a>
-                <a href="toc.html" class="menu-item w-full"><span>Access Library</span></a>
-                <a href="#" class="menu-item w-full opacity-50 cursor-not-allowed"><span>Options</span></a>
-            </nav>
-        </div>
+        <nav class="flex flex-col items-center w-full mt-4">
+            <a href="login.html" class="menu-item"><span>System Login</span></a>
+            <a href="toc.html" class="menu-item"><span>Access Library</span></a>
+            <a href="#" class="menu-item opacity-50 cursor-not-allowed"><span>Options</span></a>
+        </nav>
 
         <div class="mt-16 text-pink-300/60 text-xs tracking-[0.4em] uppercase font-bold text-center">
             System Version 2.0.1 <br><br>
