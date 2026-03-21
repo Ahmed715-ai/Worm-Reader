@@ -7,149 +7,134 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
         
-        body { 
-            background-color: #090005; 
-            color: #d1d5db; 
-            font-family: 'Rajdhani', sans-serif; 
-            overflow-x: hidden;
-        }
+        body { background-color: #090005; color: #d1d5db; font-family: 'Rajdhani', sans-serif; overflow: hidden; height: 100vh; }
 
         .bg-cyber-toc {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: 
-                linear-gradient(to right, rgba(10, 0, 5, 0.95) 0%, rgba(10, 0, 5, 0.7) 50%, rgba(0, 0, 0, 0.9) 100%),
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to right, rgba(10, 0, 5, 0.95) 0%, rgba(10, 0, 5, 0.7) 50%, rgba(0, 0, 0, 0.9) 100%),
                 url('https://i.pinimg.com/736x/f3/92/c9/f392c9ccc2e61327f29273c8af829081.jpg'); 
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
+            background-size: cover; background-position: center; z-index: -1;
         }
 
-        .text-neon-pink {
-            color: #ff2a85;
-            text-shadow: 0 0 5px rgba(255, 42, 133, 0.5), 0 0 15px rgba(255, 42, 133, 0.3);
-        }
+        .title-neon { font-family: 'Orbitron', sans-serif; color: #ff2a85; text-shadow: 0 0 10px #ff2a85; }
 
-        .title-neon {
-            font-family: 'Orbitron', sans-serif;
-            color: #ff2a85;
-            text-shadow: 0 0 10px #ff2a85, 0 0 20px #ff2a85;
-        }
+        /* Custom Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 42, 133, 0.05); }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #ff2a85; }
 
+        /* Arc Selection Buttons */
+        .arc-btn {
+            padding: 10px 15px; border-left: 2px solid transparent;
+            transition: 0.3s; cursor: pointer; text-transform: uppercase;
+            font-size: 0.85rem; letter-spacing: 1px; color: #9ca3af;
+        }
+        .arc-btn:hover { color: #ff2a85; background: rgba(255, 42, 133, 0.05); }
+        .arc-btn.active { border-left-color: #ff2a85; color: white; background: rgba(255, 42, 133, 0.1); }
+
+        /* Chapter Boxes */
         .chapter-box {
-            background-color: #050002; /* Solid black background */
-            border: 1px solid rgba(255, 42, 133, 0.2);
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
-            text-decoration: none;
-            color: inherit;
-            opacity: 1 !important; /* Forces it to NOT be transparent */
+            background-color: #050002; border: 1px solid rgba(255, 42, 133, 0.2);
+            padding: 1rem 1.5rem; transition: 0.3s; display: flex;
+            justify-content: space-between; align-items: center; text-decoration: none; color: inherit;
         }
+        .chapter-box:hover { border-color: #ff2a85; transform: translateX(5px); color: white; }
 
-        .chapter-box:hover {
-            border-color: #ff2a85;
-            box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3);
-            transform: translateX(10px);
-            color: white;
-        }
-
-        .btn-read {
-            display: block;
-            background-color: #050002; 
-            border: 1px solid #ff2a85; 
-            padding: 1rem 0;
-            font-size: 1.25rem; 
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            color: #ffffff; 
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-align: center;
-            transform: skew(-5deg); 
-            box-shadow: 4px 4px 0px rgba(255, 42, 133, 0.3);
-            width: 100%;
-        }
-        .btn-read span { display: inline-block; transform: skew(5deg); }
-        .btn-read:hover {
-            background-color: #ff2a85;
-            box-shadow: 4px 4px 15px #ff2a85;
-            text-shadow: 0 0 10px #fff;
-        }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050002; }
-        ::-webkit-scrollbar-thumb { background: #ff2a85; border-radius: 4px; }
+        .hidden-arc { display: none; }
     </style>
 </head>
-<body class="min-h-screen relative p-6 md:p-12">
-    
+<body class="p-6 md:p-12">
     <div class="bg-cyber-toc"></div>
 
-    <div class="z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 mt-8">
+    <div class="max-w-7xl mx-auto h-full flex flex-col md:flex-row gap-8">
         
-        <div class="w-full md:w-1/3 flex flex-col shrink-0">
-            <div class="relative w-full rounded-lg overflow-hidden border-2 border-pink-500 shadow-[0_0_20px_rgba(255,42,133,0.4)] mb-6">
-                <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" alt="Worm Cover" class="w-full h-auto object-cover opacity-90">
-            </div>
-
-            <h1 class="title-neon text-5xl font-black uppercase tracking-[0.2em] mb-2">WORM</h1>
-            <h2 class="text-pink-400 text-sm tracking-[0.4em] font-bold mb-1 uppercase">Parahumans System // Active</h2>
-            
-            <p class="text-white text-xs tracking-[0.3em] uppercase mb-6">
-                Operator: <span id="user-display" class="text-neon-pink font-bold">Checking Credentials...</span>
-            </p>
-
-            <div class="font-mono text-xs text-pink-300/70 space-y-1 mb-6">
-                <p>> AUTHOR: <span class="text-white">Wildbow</span></p>
-                <p>> STATUS: <span class="text-neon-pink">Decryption Ready</span></p>
-            </div>
-
-            <div class="text-sm leading-relaxed border-l-2 border-pink-500 pl-4 mb-8 italic text-gray-400">
-                "An introverted teenage girl with an unconventional superpower..."
-            </div>
-
-            <a href="gestation1-1.html" class="btn-read mb-8"><span>Begin Reading</span></a>
-
-            <a href="index.html" class="font-mono text-sm text-pink-500 hover:text-white transition-colors">
-                ← RETURN TO TERMINAL
-            </a>
+        <div class="w-full md:w-64 flex flex-col shrink-0">
+            <h1 class="title-neon text-4xl font-black mb-4">WORM</h1>
+            <div id="arc-list" class="flex flex-col overflow-y-auto custom-scroll pr-2 h-[60vh] border-r border-white/5">
+                </div>
+            <a href="index.html" class="mt-8 font-mono text-xs text-pink-500 hover:text-white transition-colors">← RETURN TO TERMINAL</a>
         </div>
 
-        <div class="w-full md:w-2/3 flex flex-col">
-            <div class="text-pink-400 text-xs tracking-[0.5em] mb-6 uppercase font-bold border-b border-pink-500/30 pb-2">
-                [ ARC 1: GESTATION ]
+        <div class="flex-1 flex flex-col h-[80vh]">
+            <div id="active-arc-title" class="text-pink-400 text-xs tracking-[0.5em] mb-6 uppercase font-bold border-b border-pink-500/30 pb-2">
+                SELECT AN ARC
             </div>
-
-            <div class="flex flex-col gap-4">
-                <a href="gestation1-1.html" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 1: Gestation 1.1</span>
-                </a>
-                
-                <a href="gestation1-2.html" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 2: Gestation 1.2</span>
-                </a>
-
-                <a href="gestation1-3.html" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 3: Gestation 1.3</span>
-                </a>
-
-                <a href="gestation1-4.html" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 4: Gestation 1.4</span>
-                </a>
-            </div>
+            
+            <div id="chapter-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-3 overflow-y-auto custom-scroll pr-4">
+                </div>
         </div>
     </div>
 
     <script>
-        const name = localStorage.getItem('storedName') || 'Guest';
-        document.getElementById('user-display').textContent = name;
-    </script>
+        const wormData = {
+            "Arc 1: Gestation": ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.x (Interlude; Danny)"],
+            "Arc 2: Insinuation": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "2.x (Interlude; Victoria)"],
+            "Arc 3: Agitation": ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.x (Interlude; Wards)"],
+            "Arc 4: Shell": ["4.1", "4.2", "4.3", "4.4", "4.5", "4.6", "4.7", "4.8", "4.9", "4.10", "4.11", "4.x (Apology Interlude; Purity)", "4.x (Interlude; Brutus)"],
+            "Arc 5: Hive": ["5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10", "5.x (Interlude; Gregor the Snail)"],
+            "Arc 6: Tangle": ["6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8", "6.9", "6.x (Interlude; Canary)"],
+            "Arc 7: Buzz": ["7.1", "7.2", "7.3", "7.4", "7.5", "7.6", "7.7", "7.8", "7.9", "7.10", "7.11", "7.12", "7.x (Interlude; Hannah)"],
+            "Arc 8: Extermination": ["8.1", "8.2", "8.3", "8.4", "8.5", "8.6", "8.7", "8.8", "8.x (Bonus Interlude; Lisa)", "8.x (Interlude; Coil)"],
+            "Arc 9: Sentinel": ["9.1", "9.2", "9.3", "9.4", "9.5", "9.6"],
+            "Arc 10: Parasite": ["10.1", "10.2", "10.3", "10.4", "10.5", "10.6", "10.x (Interlude; Alec)", "10.x (Bonus Interlude; Dragon)"],
+            "Arc 11: Infestation": ["11.1", "11.2", "11.3", "11.4", "11.5", "11.6", "11.7", "11.8", "11.a", "11.b", "11.c", "11.d", "11.e", "11.f", "11.g", "11.h"],
+            "Arc 12: Plague": ["12.1", "12.2", "12.3", "12.4", "12.5", "12.6", "12.7", "12.8", "12.x (Interlude; Jack)", "12.x (Bonus Interlude; Jamie)"],
+            "Arc 13: Snare": ["13.1", "13.2", "13.x (Bonus Interlude; Aisha)", "13.3", "13.4", "13.5", "13.6", "13.7", "13.8", "13.9", "13.10", "13.x (Interlude; Piggot)"],
+            "Arc 14: Prey": ["14.1", "14.2", "14.3", "14.4", "14.5", "14.6", "14.7", "14.8", "14.9", "14.10", "14.11", "14.x (Interlude; Sierra)", "14.y (Bonus Interlude; Legend)"],
+            "Arc 15: Colony": ["15.1", "15.x", "15.2", "15.3", "15.y", "15.4", "15.5", "15.6", "15.7", "15.z", "15.8", "15.9", "15.10", "15.x"],
+            "Arc 16: Monarch": ["16.1", "16.2", "16.x", "16.3", "16.4", "16.5", "16.6", "16.y", "16.7", "16.8", "16.9", "16.10", "16.z", "16.11", "16.12", "16.13"],
+            "Arc 17: Migration": ["17.1", "17.2", "17.3", "17.4", "17.5", "17.6", "17.7", "17.8"],
+            "Arc 18: Queen": ["18.1", "18.2", "18.x", "18.3", "18.4", "18.y", "18.5", "18.6", "18.z", "18.7", "18.8", "18.z", "18.z"],
+            "Arc 19: Scourge": ["19.1", "19.2", "19.3", "19.x", "19.4", "19.5", "19.6", "19.7", "19.y", "19.z"],
+            "Arc 20: Chrysalis": ["20.1", "20.2", "20.3", "20.4", "20.5", "20.x", "20.y"],
+            "Arc 21: Imago": ["21.1", "21.2", "21.3", "21.4", "21.5", "21.6", "21.7", "21.x", "21.y"],
+            "Arc 22: Cell": ["22.1", "22.2", "22.3", "22.4", "22.5", "22.6", "22.x", "22.y"],
+            "Arc 23: Drone": ["23.1", "23.2", "23.3", "23.4", "23.5", "23.x"],
+            "Arc 24: Crushed": ["24.1", "24.2", "24.3", "24.4", "24.5", "24.x", "24.y"],
+            "Arc 25: Scarab": ["25.1", "25.2", "25.3", "25.4", "25.5", "25.6", "25.x"],
+            "Arc 26: Sting": ["26.1", "26.2", "26.3", "26.x", "26.4", "26.5", "26.6", "26.a", "26.b", "26.x"],
+            "Arc 27: Extinction": ["27.1", "27.2", "27.3", "27.4", "27.5", "27.x", "27.y"],
+            "Arc 28: Cockroaches": ["28.1", "28.2", "28.3", "28.4", "28.5", "28.6", "28.x"],
+            "Arc 29: Venom": ["29.1", "29.2", "29.3", "29.4", "29.5", "29.6", "29.7", "29.8", "29.9", "29.x"],
+            "Arc 30: Speck": ["30.1", "30.2", "30.3", "30.4", "30.5", "30.6", "30.7"],
+            "Epilogue: Teneral": ["E.1", "E.2", "E.3", "E.4", "E.5", "E.x"]
+        };
 
+        function loadArc(arcName) {
+            document.getElementById('active-arc-title').textContent = arcName;
+            const container = document.getElementById('chapter-list-container');
+            container.innerHTML = '';
+            
+            wormData[arcName].forEach(ch => {
+                const safeName = ch.toLowerCase().replace(/\s+/g, '').replace(/[();,]/g, '');
+                // Note: You'll need to name your files like 'gestation1.1.html' or similar
+                const fileName = `gestation${ch}.html`.replace(/ /g, '');
+                
+                const a = document.createElement('a');
+                a.href = fileName;
+                a.className = 'chapter-box';
+                a.innerHTML = `<span class="font-mono tracking-widest text-sm">CH ${ch}</span>`;
+                container.appendChild(a);
+            });
+
+            // Update Active Button
+            document.querySelectorAll('.arc-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === arcName);
+            });
+        }
+
+        // Initialize Arc List
+        const arcList = document.getElementById('arc-list');
+        Object.keys(wormData).forEach(arc => {
+            const div = document.createElement('div');
+            div.className = 'arc-btn';
+            div.textContent = arc;
+            div.onclick = () => loadArc(arc);
+            arcList.appendChild(div);
+        });
+
+        // Load Arc 1 by default
+        loadArc("Arc 1: Gestation");
+    </script>
 </body>
 </html>
