@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORM | Parahumans Reader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200;400;700&display=swap');
+        body { background-color: #050505; color: white; font-family: 'Crimson Pro', serif; overflow: hidden; }
+        .bg-image {
+            background: linear-gradient(to bottom, rgba(5,5,5,0.2), #050505), 
+                        url('https://via.placeholder.com/1920x1080/111/444?text=WORM+FANART'); /* Replace with Pinterest Link */
+            background-size: cover; background-position: center;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col items-center justify-center bg-image px-6">
+    <div class="text-center space-y-6">
+        <h1 class="text-6xl font-extralight tracking-[0.3em] uppercase">WORM</h1>
+        <p class="text-blue-500 tracking-[0.5em] text-xs font-bold uppercase">Parahumans x TVD Edition</p>
+        <div class="pt-10">
+            <a href="toc.html" class="border border-white/20 px-12 py-4 hover:bg-white hover:text-black transition-all duration-500 tracking-widest uppercase text-xs">
+                Enter Interface
+            </a>
+        </div>
+    </div>
+</body>
+</html>
