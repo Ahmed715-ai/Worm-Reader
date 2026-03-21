@@ -83,3 +83,15 @@
     </div>
     <p class="text-xs text-gray-500 italic">One Piece x TVD Special Edition</p>
 </div>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('nav-menu');
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+    }
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+        link.addEventListener('click', () => toggleMenu());
+    });
+</script>
