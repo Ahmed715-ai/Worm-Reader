@@ -16,7 +16,7 @@
 
         .bg-cyber {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            inset: 0;
             background: 
                 linear-gradient(to bottom, rgba(15, 0, 10, 0.7), rgba(0, 0, 0, 0.95)),
                 url('https://i.pinimg.com/1200x/7b/0a/56/7b0a56f95df7e34b9dfa24c3e02cc8e4.jpg'); 
@@ -25,10 +25,11 @@
             z-index: -1;
         }
 
+        /* The glowing pink box from your screenshot */
         .login-box {
             background-color: rgba(5, 0, 2, 0.85);
             border: 2px solid #ff2a85;
-            box-shadow: 0 0 20px rgba(255, 42, 133, 0.3), inset 0 0 15px rgba(255, 42, 133, 0.2);
+            box-shadow: 0 0 25px rgba(255, 42, 133, 0.6);
         }
 
         .neon-input {
@@ -42,31 +43,28 @@
 
         .neon-input:focus {
             border-color: #ff2a85;
-            box-shadow: 0 0 10px rgba(255, 42, 133, 0.8);
+            box-shadow: 0 0 15px rgba(255, 42, 133, 0.8);
         }
 
         .btn-skew {
             display: inline-block;
             background-color: #050002; 
-            border: 1px solid rgba(255, 42, 133, 0.3); 
-            padding: 1rem 2rem;
-            font-size: 1.25rem; 
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            border: 1px solid #ff2a85; 
+            padding: 1.2rem;
+            font-size: 1.5rem; 
+            font-weight: 900;
             color: #ffffff; 
             text-transform: uppercase;
-            transition: all 0.3s ease;
             cursor: pointer;
             text-align: center;
             transform: skew(-5deg); 
-            box-shadow: 4px 4px 0px rgba(255, 42, 133, 0.3);
+            box-shadow: 6px 6px 0px rgba(255, 42, 133, 0.3);
             width: 100%;
         }
 
-        .btn-skew span { display: inline-block; transform: skew(5deg); }
         .btn-skew:hover {
             background-color: #ff2a85;
-            box-shadow: 4px 4px 15px #ff2a85;
+            box-shadow: 0 0 20px #ff2a85;
             text-shadow: 0 0 10px #fff;
         }
 
@@ -87,55 +85,54 @@
     <div class="bg-cyber"></div>
 
     <div id="loading-overlay">
-        <div class="text-[#ff2a85] font-['Orbitron'] text-2xl animate-pulse mb-4 tracking-[0.5em]">ACCESS GRANTED</div>
+        <div class="text-[#ff2a85] font-['Orbitron'] text-2xl animate-pulse mb-4 tracking-[0.5em]">INITIALIZING UPLINK</div>
         <div class="w-64 h-1 bg-gray-900 overflow-hidden">
-            <div class="h-full bg-[#ff2a85] transition-all duration-1000 w-0" id="progress-bar"></div>
+            <div id="progress-bar" class="h-full bg-[#ff2a85] w-0 transition-all duration-1000"></div>
         </div>
     </div>
 
     <div class="z-10 w-full max-w-md flex flex-col items-center">
-        <h1 class="font-['Orbitron'] text-4xl font-black text-[#ff2a85] tracking-[0.2em] uppercase mb-2 text-shadow-md text-center">Authorization</h1>
-        <p class="text-pink-400 text-sm tracking-[0.3em] mb-8 uppercase font-bold text-center">[ Secure Neural Uplink ]</p>
+        <h1 class="font-['Orbitron'] text-5xl font-black text-[#ff2a85] tracking-[0.2em] uppercase mb-2 text-center" style="text-shadow: 0 0 15px #ff2a85;">
+            AUTHORIZATION
+        </h1>
+        <p class="text-pink-400 text-sm tracking-[0.3em] mb-10 uppercase font-bold">[ SECURE NEURAL UPLINK ]</p>
 
-        <div class="login-box w-full p-8 rounded-lg flex flex-col gap-6">
-            <div class="flex flex-col gap-2">
-                <label class="text-white text-sm tracking-[0.2em] uppercase font-bold">User Designation</label>
-                <input type="text" id="userID" placeholder="ENTER NAME" class="neon-input w-full p-3 text-lg rounded-sm uppercase">
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <label class="text-white text-sm tracking-[0.2em] uppercase font-bold">Passcode</label>
-                <input type="password" id="userPass" placeholder="••••••••" class="neon-input w-full p-3 text-lg rounded-sm">
-            </div>
-
-            <button onclick="fakeLogin()" class="btn-skew mt-4"><span>Authenticate</span></button>
+        <div class="login-box w-full p-10 rounded-lg flex flex-col gap-8">
             
-            <div class="flex justify-between items-center mt-2">
-                <a href="index.html" class="text-pink-400 hover:text-white text-xs tracking-widest uppercase">< Return to Menu</a>
-                <a href="#" onclick="fakeLogin('Guest')" class="text-pink-400 hover:text-white text-xs tracking-widest uppercase">Guest Override ></a>
+            <div class="flex flex-col gap-4">
+                <label class="text-white text-sm tracking-[0.3em] uppercase font-bold text-center italic">What is your name, Operator?</label>
+                <input type="text" id="userName" placeholder="ENTER NAME" class="neon-input w-full p-4 text-center text-2xl rounded-sm uppercase" autocomplete="off">
+            </div>
+
+            <button onclick="saveAndGo()" class="btn-skew">
+                <span>AUTHENTICATE</span>
+            </button>
+            
+            <div class="flex justify-between items-center mt-2 px-2">
+                <a href="index.html" class="text-pink-400/60 hover:text-white text-[10px] tracking-widest uppercase transition-all font-bold">< RETURN TO MENU</a>
+                <a href="#" onclick="saveAndGo('Guest')" class="text-pink-400/60 hover:text-white text-[10px] tracking-widest uppercase transition-all font-bold italic">GUEST OVERRIDE ></a>
             </div>
         </div>
     </div>
 
     <script>
-        function fakeLogin(overrideName) {
-            // 1. Grab the name. If 'Guest' was clicked, use that. Otherwise grab the input.
-            const nameToStore = overrideName || document.getElementById('userID').value || 'Operator';
+        function saveAndGo(guestName) {
+            // Get value from box OR 'Guest' if link clicked OR 'Operator' if empty
+            const name = guestName || document.getElementById('userName').value || 'Operator';
             
-            // 2. Save it to the browser memory
-            localStorage.setItem('storedName', nameToStore);
+            // Save it for the TOC page
+            localStorage.setItem('storedName', name);
 
-            // 3. Show the loading screen
+            // Show animation
             document.getElementById('loading-overlay').style.display = 'flex';
-            const bar = document.getElementById('progress-bar');
-            
-            // Animate the bar
-            setTimeout(() => { bar.style.width = '100%'; }, 100);
-            
-            // Redirect after 1.5 seconds
+            setTimeout(() => {
+                document.getElementById('progress-bar').style.width = '100%';
+            }, 100);
+
+            // Jump to TOC
             setTimeout(() => {
                 window.location.href = "toc.html";
-            }, 1500);
+            }, 1600);
         }
     </script>
 </body>
