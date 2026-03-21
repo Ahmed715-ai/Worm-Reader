@@ -2,41 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WORM | Interface</title>
+    <title>WORM | System Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200;700&family=Inter:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=JetBrains+Mono:wght@100;400;700&display=swap');
         
-        body { background-color: #020202; color: white; font-family: 'Crimson Pro', serif; overflow: hidden; }
-
-        .bg-overlay {
-            background: linear-gradient(to bottom, rgba(2,2,2,0.6) 0%, #020202 95%), 
-                        url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            height: 100vh; width: 100vw; position: absolute;
-            top: 0; left: 0; z-index: -1; filter: brightness(0.5);
+        body { 
+            background-color: #020202; 
+            color: #fff; 
+            font-family: 'JetBrains Mono', monospace; 
+            overflow: hidden; 
         }
 
-        .glow-title {
-            letter-spacing: 0.8em;
-            text-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+        /* Techy Batcomputer / Dark System Background */
+        .bg-tech {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at center, rgba(10, 25, 50, 0.9) 0%, rgba(0,0,0,1) 100%),
+                url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-blend-mode: overlay;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* The Title: Elegant but glowing like a system error */
+        .title-glitch {
+            font-family: 'Crimson Pro', serif;
+            font-size: 7rem;
+            letter-spacing: 0.3em;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.2);
+            margin-left: 0.3em; /* Fixes centering with letter-spacing */
+        }
+
+        /* Resident Evil style menu links */
+        .menu-item {
+            display: inline-block;
+            font-size: 0.85rem;
+            letter-spacing: 0.4em;
+            color: #6b7280;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Hover effect: Turns ORV Blue and adds the ">" cursor */
+        .menu-item:hover {
+            color: #60a5fa;
+            text-shadow: 0 0 15px rgba(96, 165, 250, 0.8);
+            transform: scale(1.05);
+        }
+
+        .menu-item::before {
+            content: "> ";
+            position: absolute;
+            left: -25px;
+            opacity: 0;
+            color: #3b82f6;
+            transition: opacity 0.3s;
+        }
+
+        .menu-item:hover::before {
+            opacity: 1;
         }
     </style>
 </head>
-<body class="h-screen flex items-center justify-center px-6">
-    <div class="bg-overlay"></div>
+<body class="h-screen flex flex-col items-center justify-center relative">
+    
+    <div class="bg-tech"></div>
 
-    <div class="text-center space-y-12">
-        <div>
-            <h1 class="text-7xl font-extralight uppercase glow-title ml-[0.8em]">WORM</h1>
-            <p class="text-blue-500 font-sans tracking-[0.6em] text-[9px] font-bold uppercase mt-4 opacity-70">Parahuman x TVD Revision</p>
-        </div>
+    <div class="text-center z-10 flex flex-col items-center w-full max-w-2xl">
         
-        <div class="pt-8">
-            <a href="toc.html" class="inline-block border border-white/10 px-20 py-4 hover:border-blue-500 hover:bg-blue-500/5 transition-all duration-700 group">
-                <span class="text-[10px] tracking-[0.4em] uppercase font-sans group-hover:text-blue-400 transition-colors">Enter Library</span>
-            </a>
+        <div class="text-blue-500 text-[10px] tracking-[0.5em] mb-4 uppercase animate-pulse">
+            [ System Diagnostics: Online ]
         </div>
+
+        <h1 class="title-glitch mb-16 uppercase">WORM</h1>
+
+        <nav class="flex flex-col items-center space-y-2">
+            <a href="login.html" class="menu-item">System Login</a>
+            
+            <a href="toc.html" class="menu-item">Access Library</a>
+            
+            <a href="#" class="menu-item opacity-50 cursor-not-allowed">Options</a>
+        </nav>
+
+        <div class="mt-32 text-gray-700 text-[9px] tracking-[0.5em] uppercase">
+            System Version 1.0.4 • Wildbow
+        </div>
+
     </div>
+
 </body>
 </html>
