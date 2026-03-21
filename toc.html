@@ -2,84 +2,147 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WORM | Gestation 1.1</title>
+    <title>WORM | Access Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
         
-        body { background-color: #050002; color: #d1d5db; font-family: 'Rajdhani', sans-serif; margin: 0; display: flex; justify-content: center; }
-
-        /* Middle "Card" Layer */
-        .reader-container {
-            width: 100%; max-width: 850px; background-color: #0a0a0c;
-            border-left: 1px solid rgba(255, 42, 133, 0.2); border-right: 1px solid rgba(255, 42, 133, 0.2);
-            min-height: 100vh; padding: 5rem 2rem; box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        body { 
+            background-color: #090005; 
+            color: #d1d5db; 
+            font-family: 'Rajdhani', sans-serif; 
+            overflow-x: hidden;
         }
 
-        /* Spacing for that Aesthetic Feel */
-        .story-content { font-size: 1.2rem; line-height: 1.9; color: #c9c9c9; max-width: 650px; margin: 0 auto; }
-        .story-content p { margin-bottom: 2.5rem; }
-
-        .pink-title {
-            font-family: 'Orbitron', sans-serif; color: #ff2a85; text-transform: uppercase;
-            letter-spacing: 0.4em; text-shadow: 0 0 10px rgba(255, 42, 133, 0.6);
-            margin-bottom: 4rem; text-align: center; font-weight: 900;
+        /* RESTORING YOUR BACKGROUND FROM IMAGE 2 */
+        .bg-cyber-toc {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                linear-gradient(to right, rgba(10, 0, 5, 0.95) 0%, rgba(10, 0, 5, 0.7) 50%, rgba(0, 0, 0, 0.9) 100%),
+                url('https://i.pinimg.com/736x/f3/92/c9/f392c9ccc2e61327f29273c8af829081.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
         }
 
-        .nav-footer {
-            margin-top: 6rem; border-top: 1px solid rgba(255, 42, 133, 0.1);
-            padding-top: 2rem; display: flex; justify-content: space-between; font-family: 'Orbitron', sans-serif;
+        .text-neon-pink {
+            color: #ff2a85;
+            text-shadow: 0 0 5px rgba(255, 42, 133, 0.5), 0 0 15px rgba(255, 42, 133, 0.3);
         }
-        .nav-btn { color: #ff2a85; font-size: 0.8rem; text-decoration: none; transition: 0.3s; letter-spacing: 0.2em; }
-        .nav-btn:hover { text-shadow: 0 0 10px #ff2a85; color: white; }
+
+        .title-neon {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff2a85;
+            text-shadow: 0 0 10px #ff2a85, 0 0 20px #ff2a85;
+        }
+
+        .chapter-box {
+            background-color: #050002;
+            border: 1px solid rgba(255, 42, 133, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .chapter-box:hover {
+            border-color: #ff2a85;
+            box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3);
+            transform: translateX(10px);
+            color: white;
+        }
+
+        .btn-read {
+            display: block;
+            background-color: #050002; 
+            border: 1px solid #ff2a85; 
+            padding: 1rem 0;
+            font-size: 1.25rem; 
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: #ffffff; 
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            transform: skew(-5deg); 
+            box-shadow: 4px 4px 0px rgba(255, 42, 133, 0.3);
+            width: 100%;
+        }
+        .btn-read span { display: inline-block; transform: skew(5deg); }
+        .btn-read:hover {
+            background-color: #ff2a85;
+            box-shadow: 4px 4px 15px #ff2a85;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050002; }
+        ::-webkit-scrollbar-thumb { background: #ff2a85; border-radius: 4px; }
     </style>
 </head>
-<body>
-    <div class="reader-container">
-        <div class="flex justify-between text-[10px] font-mono text-pink-500/40 mb-12 uppercase tracking-[0.5em]">
-            <span>UPLINK: ACTIVE</span>
-            <span id="op-display">OPERATOR: [GUEST]</span>
+<body class="min-h-screen relative p-6 md:p-12">
+    
+    <div class="bg-cyber-toc"></div>
+
+    <div class="z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 mt-8">
+        
+        <div class="w-full md:w-1/3 flex flex-col shrink-0">
+            <div class="relative w-full rounded-lg overflow-hidden border-2 border-pink-500 shadow-[0_0_20px_rgba(255,42,133,0.4)] mb-6">
+                <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" alt="Worm Cover" class="w-full h-auto object-cover opacity-90">
+            </div>
+
+            <h1 class="title-neon text-5xl font-black uppercase tracking-[0.2em] mb-2">WORM</h1>
+            <h2 class="text-pink-400 text-sm tracking-[0.4em] font-bold mb-1 uppercase">Parahumans System // Active</h2>
+            
+            <p class="text-white text-xs tracking-[0.3em] uppercase mb-6">
+                Operator: <span id="user-display" class="text-neon-pink font-bold">Checking Credentials...</span>
+            </p>
+
+            <div class="font-mono text-xs text-pink-300/70 space-y-1 mb-6">
+                <p>> AUTHOR: <span class="text-white">Wildbow</span></p>
+                <p>> STATUS: <span class="text-neon-pink">Decryption Ready</span></p>
+            </div>
+
+            <div class="text-sm leading-relaxed border-l-2 border-pink-500 pl-4 mb-8 italic text-gray-400">
+                "An introverted teenage girl with an unconventional superpower..."
+            </div>
+
+            <a href="gestation1-1.html" class="btn-read mb-8"><span>Begin Reading</span></a>
+
+            <a href="index.html" class="font-mono text-sm text-pink-500 hover:text-white transition-colors">
+                ← RETURN TO TERMINAL
+            </a>
         </div>
 
-        <h1 class="pink-title text-2xl md:text-4xl">Gestation 1.1</h1>
+        <div class="w-full md:w-2/3 flex flex-col">
+            <div class="text-pink-400 text-xs tracking-[0.5em] mb-6 uppercase font-bold border-b border-pink-500/30 pb-2">
+                [ ARC 1: GESTATION ]
+            </div>
 
-        <div class="story-content">
-            <p>Class ended in five minutes and all I could think was, an hour is too long for lunch.</p>
-            <p>Since the start of the semester, I had been looking forward to the part of Mr. Gladly’s World Issues class where we’d start discussing capes. Now that it had finally arrived, I couldn’t focus. I fidgeted, my pen moving from hand to hand, tapping, or absently drawing some figure in the corner of the page to join the other doodles. My eyes were restless too, darting from the clock above the door to Mr. Gladly and back to the clock. I wasn’t picking up enough of his lesson to follow along. Twenty minutes to twelve; five minutes left before class ended.</p>
-            <p>He was animated, clearly excited about what he was talking about, and for once, the class was listening. He was the sort of teacher who tried to be friends with his students, the sort who went by “Mr. G” instead of Mr. Gladly. He liked to end class a little earlier than usual and chat with the popular kids, gave lots of group work so others could hang out with their friends in class, and had ‘fun’ assignments like mock trials.</p>
-            <p>He struck me as one of the ‘popular’ kids who had become a teacher. He probably thought he was everyone’s favorite. I wondered how he’d react if he heard my opinion on the subject. Would it shatter his self image or would he shrug it off as an anomaly from the gloomy girl that never spoke up in class?</p>
-            <p>I glanced over my shoulder. Madison Clements sat two rows to my left and two seats back. She saw me looking and smirked, her eyes narrowing, and I lowered my eyes to my notebook. I tried to ignore the ugly, sour feeling that stewed in my stomach. I glanced up at the clock. Eleven-forty-three.</p>
-            <p>“Let me wrap up here,” Mr. Gladly said, “Sorry, guys, but there is homework for the weekend. Think about capes and how they’ve impacted the world around you. Make a list if you want, but it’s not mandatory. On Monday we’ll break up into groups of four and see what group has the best list. I’ll buy the winning group treats from the vending machine.”</p>
-            <p>There were a series of cheers, followed by the classroom devolving into noisy chaos. The room was filled with sounds of binders snapping shut, textbooks and notebooks being slammed closed, chairs screeching on cheap tile and the dull roar of emerging conversation. A bunch of the more social members of the class gathered around Mr. Gladly to chat.</p>
-            <p>Me? I just put my books away and kept quiet. I’d written down almost nothing in the way of notes; there were collections of doodles spreading across the page and numbers in the margins where I’d counted down the minutes to lunch as if I was keeping track of the timer on a bomb.</p>
-            <p>Madison was talking with her friends. She was popular, but not gorgeous in the way the stereotypical popular girls on TV were. She was ‘adorable’, instead. Petite. She played up the image with sky blue pins in her shoulder length brown hair and a cutesy attitude. Madison wore a strapless top and denim skirt, which seemed absolutely moronic to me given the fact that it was still early enough in the spring that we could see our breath in the mornings.</p>
-            <p>I wasn’t exactly in a position to criticize her. Boys liked her and she had friends, while the same was hardly true for me. The only feminine feature I had going for me was my dark curly hair, which I’d grown long. The clothes I wore didn’t show skin, and I didn’t deck myself out in bright colors like a bird showing off its plumage.</p>
-            <p>The bell rang with a lilting ding-dong, and I was the first one out the door. I didn’t run, but I moved at a decent clip as I headed up the stairwell to the third floor and made my way to the girl’s washroom.</p>
-            <p>There were a half dozen girls there already, which meant I had to wait for a stall to open up. I nervously watched the door of the bathroom, feeling my heart drop every time someone entered the room.</p>
-            <p>As soon as there was a free stall, I let myself in and locked the door. I leaned against the wall and exhaled slowly. It wasn’t quite a sigh of relief. Relief implied you felt better. I wouldn’t feel better until I got home. No, I just felt less uneasy.</p>
-            <p>It took maybe five minutes before the noise of others in the washroom stopped. A peek below the partitions showed that there was nobody else in the other stalls. I sat on the lid of the toilet and got my brown bag lunch to begin eating.</p>
-            <p>Whatever my plan, I didn’t even have a chance to finish my pita wrap. The door of the bathroom banged open. I froze. I didn’t want to rustle the bag and clue anyone into what I was doing, so I kept still and listened.</p>
-            <p>“Occupied,” I called out, hesitantly.</p>
-            <p>“Oh my god, it’s Taylor!” one of the girls on the outside exclaimed with glee, then in response to something another girl whispered, I barely heard her add, “Yeah, do it!”</p>
-            <p>I stood up abruptly, letting the brown bag with the last mouthful of my lunch fall to the tiled floor. Rushing for the door, I popped the lock open and pushed. The door didn’t budge.</p>
-            <p>There were noises from the stalls on either side of me, then a sound above me. I looked up to see what it was, only to get splashed in the face. My eyes started burning, and I was momentarily blinded by the stinging fluid in my eyes and my blurring of my glasses. I could taste it as it ran down to my nose and mouth. Cranberry juice.</p>
-            <p>They didn’t stop there. I managed to pull my glasses off just in time to see Madison and Sophia leaning over the top of the stall, each of them with plastic bottles at the ready. I bent over with my hands shielding my head just before they emptied the contents over me.</p>
-            <p>It ran down the back of my neck, soaked my clothes, fizzed as it ran through my hair. I pushed against the door again, but the girl on the other side was braced against it with her body.</p>
-            <p>Empty plastic bottles with labels for grape and cranberry juice fell to the ground around me. A bottle of orange soda bounced off my shoulder to splash into the puddle before rolling under the partition and into the next stall. The smell of the fruity drinks and sodas was sickly sweet.</p>
-            <p>The door swung open, and I glared up at the three girls. Madison, Sophia and Emma. The three of them were laughing like it was the funniest thing in the world, but the sounds of their amusement barely registered with me. My attention was on the faint roar of blood pumping in my ears and an urgent, ominous crackling ‘sound’ that wouldn’t get any quieter or less persistent if I covered my ears with my hands. I could feel dribbles running down my arms and back, still chilled from the refrigerated vending machines.</p>
-            <p>I didn’t even know what I was supposed to do for my afternoon classes. Our midterm project for art was due, and I couldn’t go to class like this. Sophia would be there, and I could just imagine her smug smile of satisfaction as I showed up looking like I’d botched an attempt to tie-dye everything I owned.</p>
-            <p>I shut my eyes and felt the buzzing crystallize into concrete information. As numerous as stars in the night sky, tiny knots of intricate data filled the area around me. On every surface of the bathroom were bugs; Flies, ants, spiders, centipedes, millipedes, earwigs, beetles, wasps and bees. With every passing second, more streamed in through the open window and the various openings in the bathroom, moving with surprising speed. They gathered around me and spread out over every available surface; primitive bundles of signals and responses, waiting for further instruction.</p>
-            <p>I was all too aware that I’d get caught and arrested if I attacked my fellow students. There were three teams of superheroes and any number of solo heroes in the city. I didn’t really care. The thought of my father seeing the aftermath on the news, his disappointment in me, his shame? That was more daunting, but it still didn't outweigh the anger and frustration.</p>
-            <p>I was going to be a superhero. That was the goal I used to calm myself down at moments like these. It was what I used to make myself get out of bed on a school day. It was a crazy dream that made things tolerable. It was something to look forward to, something to work towards. It made it possible to keep from dwelling on the fact that Emma Barnes, leader of the trio, had once been my best friend.</p>
-        </div>
-
-        <div class="nav-footer">
-            <a href="toc.html" class="nav-btn">« EXIT_ARCHIVE</a>
-            <a href="gestation1-2.html" class="nav-btn">NEXT_SECTOR »</a>
+            <div class="flex flex-col gap-4">
+                <a href="gestation1-1.html" class="chapter-box">
+                    <span class="font-mono tracking-widest text-lg">Ch 1: Gestation 1.1</span>
+                </a>
+                
+                <a href="#" class="chapter-box opacity-50">
+                    <span class="font-mono tracking-widest text-lg">Ch 2: Gestation 1.2</span>
+                    <span class="text-neon-pink text-xs">[ ENCRYPTED ]</span>
+                </a>
+            </div>
         </div>
     </div>
+
     <script>
-        document.getElementById('op-display').textContent = "OPERATOR: " + (localStorage.getItem('storedName') || 'GUEST');
+        const name = localStorage.getItem('storedName') || 'Guest';
+        document.getElementById('user-display').textContent = name;
     </script>
+
 </body>
 </html>
