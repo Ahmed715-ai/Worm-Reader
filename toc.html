@@ -14,7 +14,6 @@
             overflow-x: hidden;
         }
 
-        /* The New Cyberpunk Alleyway Background */
         .bg-cyber-toc {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -26,7 +25,6 @@
             z-index: -1;
         }
 
-        /* Neon Text Utilities */
         .text-neon-pink {
             color: #ff2a85;
             text-shadow: 0 0 5px rgba(255, 42, 133, 0.5), 0 0 15px rgba(255, 42, 133, 0.3);
@@ -38,7 +36,6 @@
             text-shadow: 0 0 10px #ff2a85, 0 0 20px #ff2a85;
         }
 
-        /* Floating Chapter Boxes */
         .chapter-box {
             background-color: #050002;
             border: 1px solid rgba(255, 42, 133, 0.2);
@@ -49,7 +46,8 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
-            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
 
         .chapter-box:hover {
@@ -65,13 +63,6 @@
             border-color: rgba(255, 42, 133, 0.1);
         }
 
-        .chapter-box.locked:hover {
-            transform: none;
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
-            border-color: rgba(255, 42, 133, 0.3);
-        }
-
-        /* The Neon Read Button */
         .btn-read {
             display: block;
             background-color: #050002; 
@@ -96,15 +87,9 @@
             text-shadow: 0 0 10px #fff;
         }
 
-        /* The Pink Scrolling Line */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050002; border-left: 1px solid rgba(255, 42, 133, 0.1); }
-        ::-webkit-scrollbar-thumb { 
-            background: #ff2a85; 
-            border-radius: 4px; 
-            box-shadow: 0 0 10px #ff2a85;
-        }
-        ::-webkit-scrollbar-thumb:hover { background: #ff7ebb; }
+        ::-webkit-scrollbar-track { background: #050002; }
+        ::-webkit-scrollbar-thumb { background: #ff2a85; border-radius: 4px; }
     </style>
 </head>
 <body class="min-h-screen relative p-6 md:p-12">
@@ -114,71 +99,55 @@
     <div class="z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 mt-8">
         
         <div class="w-full md:w-1/3 flex flex-col shrink-0">
-            
             <div class="relative w-full rounded-lg overflow-hidden border-2 border-pink-500 shadow-[0_0_20px_rgba(255,42,133,0.4)] mb-6">
-                <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" alt="Worm Cover" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity">
-                <div class="absolute inset-0 bg-pink-500 mix-blend-overlay opacity-20 pointer-events-none"></div>
+                <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" alt="Worm Cover" class="w-full h-auto object-cover opacity-90">
             </div>
 
             <h1 class="title-neon text-5xl font-black uppercase tracking-[0.2em] mb-2">WORM</h1>
-            <h2 class="text-pink-400 text-sm tracking-[0.4em] font-bold mb-6 uppercase">Parahumans System // Active</h2>
+            <h2 class="text-pink-400 text-sm tracking-[0.4em] font-bold mb-1 uppercase">Parahumans System // Active</h2>
+            
+            <p class="text-white text-xs tracking-[0.3em] uppercase mb-6">
+                Operator: <span id="user-display" class="text-neon-pink font-bold">Checking Credentials...</span>
+            </p>
 
             <div class="font-mono text-xs text-pink-300/70 space-y-1 mb-6">
                 <p>> AUTHOR: <span class="text-white">Wildbow</span></p>
-                <p>> CHAPTERS: <span class="text-white">304 (Archived)</span></p>
-                <p>> STATUS: <span class="text-neon-pink">System Active</span></p>
+                <p>> STATUS: <span class="text-neon-pink">Decryption Ready</span></p>
             </div>
 
             <div class="text-sm leading-relaxed border-l-2 border-pink-500 pl-4 mb-8 italic text-gray-400">
-                "An introverted teenage girl with an unconventional superpower, Taylor goes out in costume to find escape from a deeply unhappy civilian life. Her first attempt at taking down a supervillain sees her mistaken for one..."
+                "An introverted teenage girl with an unconventional superpower..."
             </div>
 
             <a href="chapter1.html" class="btn-read mb-8"><span>Begin Reading</span></a>
 
-            <a href="index.html" class="font-mono text-sm text-pink-500 hover:text-white transition-colors flex items-center gap-2">
-                <span class="text-lg">←</span> RETURN TO TERMINAL
+            <a href="index.html" class="font-mono text-sm text-pink-500 hover:text-white transition-colors">
+                ← RETURN TO TERMINAL
             </a>
         </div>
 
         <div class="w-full md:w-2/3 flex flex-col">
-            
             <div class="text-pink-400 text-xs tracking-[0.5em] mb-6 uppercase font-bold border-b border-pink-500/30 pb-2">
                 [ ARC 1: GESTATION ]
             </div>
 
             <div class="flex flex-col gap-4">
-                
-                <a href="#" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 1: Ep. 1 - Gestation, I</span>
+                <a href="chapter1.html" class="chapter-box">
+                    <span class="font-mono tracking-widest text-lg">Ch 1: Gestation 1.1</span>
                 </a>
                 
-                <a href="#" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 2: Ep. 1 - Gestation, II</span>
+                <a href="#" class="chapter-box opacity-50">
+                    <span class="font-mono tracking-widest text-lg">Ch 2: Gestation 1.2</span>
+                    <span class="text-neon-pink text-xs">[ ENCRYPTED ]</span>
                 </a>
-
-                <a href="#" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 3: Ep. 1 - Gestation, III</span>
-                </a>
-
-                <a href="#" class="chapter-box">
-                    <span class="font-mono tracking-widest text-lg">Ch 4: Ep. 1 - Gestation, IV</span>
-                </a>
-
-                <div class="chapter-box locked">
-                    <span class="font-mono tracking-widest text-lg text-gray-500">Ch 5: Ep. 1 - Gestation, V</span>
-                    <span class="text-neon-pink font-mono text-sm tracking-widest font-bold">[ ACCESS DENIED ]</span>
-                </div>
-
-                <div class="chapter-box locked">
-                    <span class="font-mono tracking-widest text-lg text-gray-500">Ch 6: Ep. 1 - Gestation, VI</span>
-                    <span class="text-neon-pink font-mono text-sm tracking-widest font-bold">[ ACCESS DENIED ]</span>
-                </div>
-
             </div>
-            
         </div>
-        
     </div>
+
+    <script>
+        const name = localStorage.getItem('storedName') || 'Guest';
+        document.getElementById('user-display').textContent = name;
+    </script>
 
 </body>
 </html>
