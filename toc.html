@@ -4,150 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WORM | Access Library</title>
-
     <link id="favicon" rel="icon" type="image/png" href="https://img.icons8.com/color/48/cherry-blossom.png">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap');
         
-        :root {
-            --neon-color: #ff2a85; /* Default Pink */
-            --neon-shadow: rgba(255, 42, 133, 0.5);
-        }
+        :root { --neon-color: #ff2a85; --neon-shadow: rgba(255, 42, 133, 0.5); }
 
         body { 
-            background-color: #090005; 
-            color: #d1d5db; 
-            font-family: 'Rajdhani', sans-serif; 
-            overflow-x: hidden;
-            transition: all 0.5s ease;
+            background-color: #090005; color: #d1d5db; 
+            font-family: 'Rajdhani', sans-serif; overflow-x: hidden;
+        }
+
+        /* --- HUD DATA OVERLAYS --- */
+        .hud-corner {
+            position: fixed; font-family: 'Share Tech Mono', monospace;
+            font-size: 10px; color: var(--neon-color); opacity: 0.6; z-index: 40;
+            pointer-events: none; text-transform: uppercase;
+        }
+        .top-left { top: 20px; left: 20px; }
+        .top-right { top: 20px; right: 20px; text-align: right; }
+        .bottom-right { bottom: 20px; right: 20px; text-align: right; }
+
+        .rec-dot {
+            display: inline-block; width: 8px; height: 8px;
+            background: red; border-radius: 50%; margin-right: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* --- SCANLINES --- */
+        #scanline {
+            position: fixed; inset: 0; z-index: 50; pointer-events: none;
+            background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.1) 50%),
+                        linear-gradient(90deg, rgba(255,0,0,0.03), rgba(0,255,0,0.01), rgba(0,0,255,0.03));
+            background-size: 100% 3px, 3px 100%;
         }
 
         /* --- THEME SYSTEM --- */
-        .text-neon {
-            color: var(--neon-color);
-            text-shadow: 0 0 5px var(--neon-shadow), 0 0 15px var(--neon-shadow);
-        }
+        .text-neon { color: var(--neon-color); text-shadow: 0 0 10px var(--neon-shadow); }
+        .title-neon { font-family: 'Orbitron', sans-serif; color: var(--neon-color); text-shadow: 0 0 15px var(--neon-color); }
+        
+        #progress-bar { height: 100%; width: 0%; background: var(--neon-color); box-shadow: 0 0 15px var(--neon-color); transition: 0.2s; }
+        #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,0.05); z-index: 100; }
 
-        .title-neon {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-color);
-            text-shadow: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color);
-        }
+        .theme-orb { width: 18px; height: 18px; border-radius: 50%; cursor: pointer; border: 1px solid white; transition: 0.3s; }
+        .theme-orb:hover { transform: scale(1.3); }
 
-        #progress-bar {
-            height: 100%; width: 0%;
-            background: var(--neon-color);
-            box-shadow: 0 0 10px var(--neon-color);
-        }
-
-        /* --- SIDEBAR THEME BUTTONS --- */
-        .theme-orb {
-            width: 20px; height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid white;
-            transition: transform 0.2s;
-        }
-        .theme-orb:hover { transform: scale(1.2); }
-
-        /* --- BOXES --- */
+        /* --- CONTENT BOXES --- */
         .chapter-box {
-            background-color: #050002;
-            border: 1px solid var(--neon-shadow);
-            border-radius: 8px;
-            padding: 1.2rem 2rem;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
-            text-decoration: none;
-            color: inherit;
-            margin-bottom: 0.8rem;
+            background: rgba(5, 0, 2, 0.8); border: 1px solid var(--neon-shadow);
+            border-radius: 4px; padding: 1rem 2rem; margin-bottom: 0.8rem;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s; position: relative; overflow: hidden;
         }
+        .chapter-box:hover { border-color: var(--neon-color); transform: translateX(8px); background: rgba(255, 42, 133, 0.05); }
 
-        .chapter-box:hover {
-            border-color: var(--neon-color);
-            box-shadow: 5px 5px 0px var(--neon-shadow);
-            transform: translateX(10px);
-            color: white;
+        .glitch-text::before {
+            content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%;
+            visibility: hidden; background: #050002;
         }
+        .chapter-box:hover .glitch-text::before {
+            visibility: visible; left: 2px; text-shadow: -2px 0 var(--neon-color);
+            clip: rect(10px, 9999px, 25px, 0); animation: glitch 2s infinite linear alternate-reverse;
+        }
+        @keyframes glitch { 0% { clip: rect(10px, 9999px, 20px, 0); } 100% { clip: rect(40px, 9999px, 50px, 0); } }
 
         .arc-header {
-            color: var(--neon-color);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            padding-bottom: 0.5rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--neon-shadow);
+            color: var(--neon-color); font-family: 'Orbitron', sans-serif; font-size: 0.7rem;
+            letter-spacing: 0.4em; text-transform: uppercase; padding-bottom: 0.4rem;
+            margin-top: 2.5rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--neon-shadow);
         }
 
         #archive-search {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--neon-shadow);
-            padding: 1rem 1.5rem;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            outline: none;
-            border-radius: 4px;
-            margin-bottom: 2rem;
+            width: 100%; background: rgba(0,0,0,0.6); border: 1px solid var(--neon-shadow);
+            padding: 0.8rem 1.2rem; color: white; font-family: 'Share Tech Mono'; outline: none;
         }
 
-        /* Glitch Animation using Variable */
-        .glitch-text { position: relative; }
-        .chapter-box:hover .glitch-text::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 2px; width: 100%; height: 100%;
-            background: #050002;
-            text-shadow: -2px 0 var(--neon-color);
-            clip: rect(10px, 9999px, 20px, 0);
-            animation: glitch-anim 2s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 20px, 0); }
-            100% { clip: rect(40px, 9999px, 50px, 0); }
-        }
-
-        #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255,255,255,0.1); z-index: 100; }
         .sidebar-fixed { position: sticky; top: 2rem; }
     </style>
 </head>
-<body class="min-h-screen relative p-6 md:p-12">
-    
-    <div id="progress-container"><div id="progress-bar"></div></div>
-    <div class="fixed top-0 left-0 w-full h-full bg-[url('https://i.pinimg.com/736x/f3/92/c9/f392c9ccc2e61327f29273c8af829081.jpg')] bg-cover bg-center opacity-20 -z-10"></div>
+<body>
 
-    <div class="z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 mt-8">
+    <div id="scanline"></div>
+    <div id="progress-container"><div id="progress-bar"></div></div>
+
+    <div class="hud-corner top-left">
+        SYS_VER: 4.0.2<br>
+        LOC: BROCKTON_BAY_DB<br>
+        <span class="text-neon">ENCRYPTION: ACTIVE</span>
+    </div>
+    <div class="hud-corner top-right">
+        <span class="rec-dot"></span>REC LIVE<br>
+        MAR 2026<br>
+        BIT_RATE: 128.4 kbps
+    </div>
+    <div class="hud-corner bottom-right">
+        X-COORD: 45.221<br>
+        Y-COORD: 10.884<br>
+        ID: SAKURA_H
+    </div>
+
+    <div class="fixed inset-0 bg-[url('https://i.pinimg.com/736x/f3/92/c9/f392c9ccc2e61327f29273c8af829081.jpg')] bg-cover bg-center opacity-10 -z-10"></div>
+
+    <div class="z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 mt-12 p-6">
         
         <div class="w-full md:w-1/3 flex flex-col shrink-0">
             <div class="sidebar-fixed">
-                <div class="relative w-full rounded-lg overflow-hidden border-2 border-white/20 mb-6">
-                    <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" alt="Sakura" class="w-full h-auto object-cover">
+                <div class="relative w-full rounded-sm overflow-hidden border border-white/10 mb-6">
+                    <img src="https://i.pinimg.com/736x/d4/c3/21/d4c32195c8b0d2150dbe8fa1f8a32b93.jpg" class="w-full opacity-80">
                 </div>
                 
                 <h1 class="title-neon text-5xl font-black mb-2">WORM</h1>
                 
                 <div class="flex gap-4 mb-6 items-center">
-                    <span class="text-xs uppercase tracking-widest opacity-50">Theme:</span>
                     <div class="theme-orb bg-[#ff2a85]" onclick="setTheme('#ff2a85', 'https://img.icons8.com/color/48/cherry-blossom.png')"></div>
                     <div class="theme-orb bg-[#00fff9]" onclick="setTheme('#00fff9', 'https://img.icons8.com/fluency/48/water-element.png')"></div>
                     <div class="theme-orb bg-[#39ff14]" onclick="setTheme('#39ff14', 'https://img.icons8.com/color/48/leaf.png')"></div>
                 </div>
 
-                <p class="text-white text-xs tracking-[0.3em] uppercase mb-6">
-                    Operator: <span id="user-display" class="text-neon font-bold">...</span>
-                </p>
-                
-                <a href="index.html" class="font-mono text-sm opacity-50 hover:opacity-100 transition-opacity">
-                    ← RETURN TO TERMINAL
+                <div class="bg-black/40 p-4 border-l-2 border-neon-pink mb-6">
+                    <span class="text-xs font-bold text-neon uppercase">> Operator Log:</span><br>
+                    <span id="sakura-quote" class="text-sm italic text-gray-400 font-mono">"Hardships make you stronger."</span>
+                </div>
+
+                <a href="index.html" class="font-mono text-xs text-neon hover:underline">
+                    &lt; EXIT_TO_MAIN &gt;
                 </a>
             </div>
         </div>
@@ -159,7 +142,22 @@
     </div>
 
     <script>
-        // --- DATASET ---
+        const quotes = {
+            '#ff2a85': "A person grows up when they are able to overcome hardships.",
+            '#00fff9': "The things that are most important aren't written in books.",
+            '#39ff14': "I've always considered myself to be a true ninja... I'll show you!"
+        };
+
+        function setTheme(color, iconUrl) {
+            document.documentElement.style.setProperty('--neon-color', color);
+            document.documentElement.style.setProperty('--neon-shadow', color + '40');
+            document.getElementById('favicon').href = iconUrl;
+            document.getElementById('sakura-quote').textContent = `"${quotes[color]}"`;
+            localStorage.setItem('userTheme', color);
+            localStorage.setItem('userIcon', iconUrl);
+        }
+
+        // --- FULL STORY LIST ---
         const fullStoryList = [
             { arc: "Arc 1: Gestation", chaps: ["1.01", "1.02", "1.03", "1.04", "1.05", "1.06", "1.x (Danny)"] },
             { arc: "Arc 2: Insinuation", chaps: ["2.01", "2.02", "2.03", "2.04", "2.05", "2.06", "2.07", "2.08", "2.09", "2.x (Victoria)"] },
@@ -194,24 +192,6 @@
             { arc: "Epilogue: Teneral", chaps: ["E.1", "E.2", "E.3", "E.4", "E.5", "E.x"] }
         ];
 
-        // --- THEME SWITCHER LOGIC ---
-        function setTheme(color, iconUrl) {
-            document.documentElement.style.setProperty('--neon-color', color);
-            // Create a semi-transparent version for shadows
-            document.documentElement.style.setProperty('--neon-shadow', color + '80'); 
-            
-            // Swap Favicon
-            document.getElementById('favicon').href = iconUrl;
-            
-            // Save preference
-            localStorage.setItem('userTheme', color);
-            localStorage.setItem('userIcon', iconUrl);
-        }
-
-        // --- CORE RENDER ---
-        const container = document.getElementById('full-archive');
-        document.getElementById('user-display').textContent = localStorage.getItem('storedName') || 'Guest';
-
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -220,6 +200,7 @@
         };
 
         function render() {
+            const container = document.getElementById('full-archive');
             fullStoryList.forEach(arcObj => {
                 const header = document.createElement('div');
                 header.className = 'arc-header';
@@ -227,10 +208,8 @@
                 container.appendChild(header);
 
                 arcObj.chaps.forEach(ch => {
-                    const chClean = ch.split(' ')[0].replace('.', '-');
-                    const link = `gestation${chClean}.html`;
                     const box = document.createElement('a');
-                    box.href = link;
+                    box.href = `gestation${ch.split(' ')[0].replace('.', '-')}.html`;
                     box.className = 'chapter-box';
                     box.setAttribute('data-keywords', `${arcObj.arc} ${ch}`.toLowerCase());
                     box.innerHTML = `<span class="glitch-text font-mono tracking-widest text-lg" data-text="Ch: ${ch}">Ch: ${ch}</span>`;
@@ -255,7 +234,6 @@
             }
         }
 
-        // Load saved theme on boot
         const savedTheme = localStorage.getItem('userTheme');
         const savedIcon = localStorage.getItem('userIcon');
         if(savedTheme) setTheme(savedTheme, savedIcon);
