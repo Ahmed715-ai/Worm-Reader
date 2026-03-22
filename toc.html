@@ -44,6 +44,30 @@
             text-shadow: 0 0 10px #ff2a85, 0 0 20px #ff2a85;
         }
 
+        /* --- SEARCH BAR STYLING --- */
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        #archive-search {
+            width: 100%;
+            background: rgba(255, 42, 133, 0.05);
+            border: 1px solid rgba(255, 42, 133, 0.3);
+            padding: 1rem 1.5rem;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            outline: none;
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+        #archive-search:focus {
+            border-color: #ff2a85;
+            box-shadow: 0 0 15px rgba(255, 42, 133, 0.2);
+            background: rgba(255, 42, 133, 0.1);
+        }
+
+        /* --- GLITCH EFFECT --- */
         .chapter-box {
             background-color: #050002;
             border: 1px solid rgba(255, 42, 133, 0.2);
@@ -57,6 +81,8 @@
             text-decoration: none;
             color: inherit;
             margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .chapter-box:hover {
@@ -64,6 +90,41 @@
             box-shadow: 5px 5px 0px rgba(255, 42, 133, 0.3);
             transform: translateX(10px);
             color: white;
+        }
+
+        .glitch-text { position: relative; }
+
+        .chapter-box:hover .glitch-text::before,
+        .chapter-box:hover .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #050002;
+        }
+
+        .chapter-box:hover .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff2a85;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .chapter-box:hover .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 20px, 0); }
+            20% { clip: rect(30px, 9999px, 40px, 0); }
+            40% { clip: rect(50px, 9999px, 60px, 0); }
+            100% { clip: rect(80px, 9999px, 90px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(5px, 9999px, 15px, 0); }
+            100% { clip: rect(85px, 9999px, 95px, 0); }
         }
 
         .arc-header {
@@ -79,7 +140,6 @@
         }
 
         .sidebar-fixed { position: sticky; top: 2rem; }
-        
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #050002; }
         ::-webkit-scrollbar-thumb { background: #ff2a85; border-radius: 4px; }
@@ -120,6 +180,10 @@
         </div>
 
         <div class="w-full md:w-2/3 flex flex-col pb-24">
+            <div class="search-container">
+                <input type="text" id="archive-search" placeholder="[ SEARCH_DATABASE... ]" onkeyup="searchChapters()">
+            </div>
+
             <div id="full-archive"></div>
         </div>
     </div>
@@ -160,26 +224,56 @@
         ];
 
         const container = document.getElementById('full-archive');
-        const name = localStorage.getItem('storedName') || 'Guest';
-        document.getElementById('user-display').textContent = name;
+        const nameDisplay = localStorage.getItem('storedName') || 'Guest';
+        document.getElementById('user-display').textContent = nameDisplay;
 
-        fullStoryList.forEach(arcObj => {
-            const header = document.createElement('div');
-            header.className = 'arc-header';
-            header.textContent = `[ ${arcObj.arc} ]`;
-            container.appendChild(header);
+        // Render everything initially
+        renderLibrary(fullStoryList);
 
-            arcObj.chaps.forEach(ch => {
-                const chClean = ch.split(' ')[0].replace('.', '-');
-                const link = `gestation${chClean}.html`;
-                
-                const box = document.createElement('a');
-                box.href = link;
-                box.className = 'chapter-box';
-                box.innerHTML = `<span class="font-mono tracking-widest text-lg">Ch: ${ch}</span>`;
-                container.appendChild(box);
+        function renderLibrary(data) {
+            container.innerHTML = '';
+            data.forEach(arcObj => {
+                const header = document.createElement('div');
+                header.className = 'arc-header';
+                header.textContent = `[ ${arcObj.arc} ]`;
+                container.appendChild(header);
+
+                arcObj.chaps.forEach(ch => {
+                    const chClean = ch.split(' ')[0].replace('.', '-');
+                    const link = `gestation${chClean}.html`;
+                    const box = document.createElement('a');
+                    box.href = link;
+                    box.className = 'chapter-box';
+                    box.setAttribute('data-keywords', `${arcObj.arc} ${ch}`.toLowerCase());
+                    box.innerHTML = `<span class="glitch-text font-mono tracking-widest text-lg" data-text="Ch: ${ch}">Ch: ${ch}</span>`;
+                    container.appendChild(box);
+                });
             });
-        });
+        }
+
+        // SEARCH FUNCTION
+        function searchChapters() {
+            const input = document.getElementById('archive-search').value.toLowerCase();
+            const boxes = document.getElementsByClassName('chapter-box');
+            const headers = document.getElementsByClassName('arc-header');
+            
+            // Hide/Show Boxes
+            for (let box of boxes) {
+                const keywords = box.getAttribute('data-keywords');
+                box.style.display = keywords.includes(input) ? "flex" : "none";
+            }
+
+            // Hide/Show Arc Headers based on visible boxes
+            for (let header of headers) {
+                let next = header.nextElementSibling;
+                let hasVisible = false;
+                while (next && !next.classList.contains('arc-header')) {
+                    if (next.style.display !== 'none') hasVisible = true;
+                    next = next.nextElementSibling;
+                }
+                header.style.display = hasVisible ? "block" : "none";
+            }
+        }
     </script>
 </body>
 </html>
